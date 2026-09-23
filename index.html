@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#0B1024">
 <meta property="og:title" content="Birth Code">
 <meta property="og:description" content="Your personal code, written the moment you were born.">
-<meta property="og:image" content="img/star.jpg">
+<meta property="og:image" content="img/icon.png">
 <link rel="icon" href="img/icon.png">
 <link rel="apple-touch-icon" href="img/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -136,6 +136,22 @@
   .card h3 { font-family: var(--display); font-weight: 600; font-size: 28px; line-height: 1.15; margin-top: 18px; }
   .card p { font-size: 15px; color: var(--ivory-soft); margin-top: 10px; }
 
+  /* drawn artwork: fine gold lines that draw themselves */
+  .art { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 0 4px rgba(216, 182, 124, 0.5)); }
+  .art path, .art circle:not(.dot) { fill: none; stroke: var(--gold); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round;
+    stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .art .dot { fill: var(--gold-light); opacity: 0; }
+  .drawn .art path, .drawn .art circle:not(.dot) { animation: draw 2.4s cubic-bezier(.45, .05, .25, 1) forwards; }
+  .drawn .art .dot { animation: glow 1s ease 1.6s forwards; }
+  .drawn .art path:nth-child(3n+1), .drawn .art circle:nth-child(3n+1) { animation-delay: .15s; }
+  .drawn .art path:nth-child(3n+2), .drawn .art circle:nth-child(3n+2) { animation-delay: .35s; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes glow { to { opacity: 1; } }
+  .artframe { position: relative; aspect-ratio: 1; border-radius: 22px; padding: 14%;
+    background: radial-gradient(circle at 50% 45%, rgba(216, 182, 124, 0.16), transparent 62%), linear-gradient(160deg, #111a3a, #0a1128);
+    box-shadow: inset 0 0 0 1px rgba(216, 182, 124, 0.3), 0 24px 60px rgba(0, 0, 0, 0.45); }
+  .artframe::after { content: ''; position: absolute; inset: 10px; border-radius: 16px; border: 1px solid rgba(216, 182, 124, 0.14); pointer-events: none; }
+
   /* the explorer of every system */
   .explorer { display: grid; grid-template-columns: 280px 1fr; gap: 28px; margin-top: 60px; align-items: start; }
   .tabs { display: flex; flex-direction: column; gap: 6px; position: sticky; top: 100px; }
@@ -148,7 +164,7 @@
   .tab:hover { color: var(--ivory); background: rgba(255, 255, 255, 0.03); }
   .tab.on { color: var(--ivory); background: rgba(216, 182, 124, 0.1); border-color: var(--line); }
   .panel {
-    display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 34px; padding: 38px 40px; border-radius: 26px; min-height: 520px;
+    display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 34px; padding: 38px 40px; border-radius: 26px; min-height: 520px;
     background: linear-gradient(160deg, rgba(31, 41, 80, 0.62), rgba(15, 22, 48, 0.4)); border: 1px solid var(--line);
     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
   }
@@ -161,7 +177,7 @@
   .panel-list li { break-inside: avoid; position: relative; padding-left: 20px; margin-bottom: 11px; font-size: 14.5px; line-height: 1.45; color: var(--ivory); }
   .panel-list li::before { content: '✦'; position: absolute; left: 0; top: 1px; font-size: 10px; color: var(--gold); }
   .panel-art { align-self: center; }
-  .panel-art img { width: 100%; border-radius: 16px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(216, 182, 124, 0.3); }
+
   @media (max-width: 1240px) { .panel-list { columns: 1; } }
   @media (max-width: 980px) {
     .explorer { grid-template-columns: 1fr; }
@@ -189,6 +205,30 @@
   .trustitem span { display: block; font-size: 14.5px; color: var(--ivory-soft); margin-top: 8px; }
   @media (max-width: 900px) { .trustgrid { grid-template-columns: 1fr; gap: 24px; } }
 
+  /* ask the cards */
+  .ask { text-align: center; }
+  .ask form { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 34px; }
+  .ask input[type=text] { flex: 1 1 360px; max-width: 520px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--line); border-radius: 999px;
+    color: var(--ivory); font: 500 16px var(--body); padding: 14px 24px; }
+  .ask input[type=text]:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 4px rgba(216, 182, 124, 0.15); }
+  .ask .btn { border: 0; cursor: pointer; font-family: var(--body); }
+  .askstage { display: flex; gap: 48px; align-items: center; justify-content: center; margin-top: 50px; perspective: 1400px; flex-wrap: wrap; }
+  .askcard { position: relative; width: 220px; aspect-ratio: 2 / 3; border-radius: 16px; transform-style: preserve-3d;
+    transform: rotateY(180deg); transition: transform 1.2s cubic-bezier(.2, .75, .15, 1);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(216, 182, 124, 0.35); }
+  .askcard.shuffle { animation: shuffle .9s ease-in-out; }
+  @keyframes shuffle { 0%, 100% { transform: rotateY(180deg) translateY(0) rotateZ(0); } 25% { transform: rotateY(180deg) translateY(-14px) rotateZ(-6deg); } 50% { transform: rotateY(180deg) translateY(4px) rotateZ(5deg); } 75% { transform: rotateY(180deg) translateY(-8px) rotateZ(-2deg); } }
+  .askcard.open { transform: rotateY(0deg); }
+  .askcard .face.front { background: #0B1430 center / cover no-repeat; }
+  .askanswer { max-width: 380px; text-align: left; opacity: 0; transform: translateY(12px); transition: opacity .8s ease .9s, transform .8s ease .9s; }
+  .askanswer.show { opacity: 1; transform: none; }
+  .askanswer .verdict { font-family: var(--display); font-size: 64px; line-height: 1; background: linear-gradient(180deg, #FFF8EC, var(--gold-deep));
+    -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .askanswer .cardname { font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-top: 12px; }
+  .askanswer p { color: var(--ivory-soft); margin-top: 10px; font-size: 16px; }
+  .askanswer .q { font-family: var(--display); font-style: italic; font-size: 20px; color: var(--ivory); margin-bottom: 14px; }
+  @media (max-width: 640px) { .askanswer { text-align: center; } .askcard { width: 180px; } }
+
   /* the map: five stations on a gold path, cards that turn over */
   .journey { position: relative; margin-top: 70px; }
   .journey .path { position: absolute; left: 0; right: 0; top: 34%; width: 100%; height: 34%; overflow: visible; pointer-events: none; }
@@ -205,8 +245,18 @@
   .station.turned .flip { transform: rotateY(0deg) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); }
   .station.turned.hover .flip { transition: transform .15s ease-out; }
   .face { position: absolute; inset: 0; border-radius: inherit; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: #0B1430 center / cover no-repeat; }
-  .face.back { background-image: url('img/back.jpg'); transform: rotateY(180deg); }
-  .face.front.mark { background-size: 92%; background-color: #0A1330; }
+  .face.back { transform: rotateY(180deg);
+    background: radial-gradient(circle at 50% 50%, rgba(216, 182, 124, 0.18), transparent 55%),
+      radial-gradient(1px 1px at 20% 30%, #F0DBAE, transparent), radial-gradient(1px 1px at 70% 20%, #F0DBAE, transparent),
+      radial-gradient(1px 1px at 40% 75%, #F0DBAE, transparent), radial-gradient(1px 1px at 85% 65%, #F0DBAE, transparent),
+      radial-gradient(1px 1px at 15% 85%, #F0DBAE, transparent), radial-gradient(1px 1px at 60% 50%, #F0DBAE, transparent),
+      linear-gradient(160deg, #141d42, #0a1128);
+    box-shadow: inset 0 0 0 6px #0c1330, inset 0 0 0 7px rgba(216, 182, 124, 0.55), inset 0 0 0 12px #0c1330, inset 0 0 0 13px rgba(216, 182, 124, 0.3); }
+  .face.back::after { content: '☾ ✦ ☽'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-family: var(--display); font-size: 30px; letter-spacing: 0.3em; color: var(--gold); text-shadow: 0 0 12px rgba(216, 182, 124, 0.7); }
+  .face.front.drawnface .art { filter: none; }
+  .face.front.drawnface { padding: 18%; background: radial-gradient(circle at 50% 42%, rgba(216, 182, 124, 0.2), transparent 60%), linear-gradient(160deg, #141d42, #0a1128);
+    box-shadow: inset 0 0 0 6px #0c1330, inset 0 0 0 7px rgba(216, 182, 124, 0.45); display: flex; align-items: center; }
   .glare {
     position: absolute; inset: 0; border-radius: inherit; pointer-events: none; backface-visibility: hidden; -webkit-backface-visibility: hidden;
     background: linear-gradient(115deg, transparent 35%, rgba(255, 246, 225, 0.32) 50%, transparent 65%);
@@ -288,23 +338,31 @@
   }
   .try input[type=date]:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 4px rgba(216, 182, 124, 0.15); }
   .try button.btn { border: 0; cursor: pointer; font-family: var(--body); }
-  .results { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 50px; text-align: left; }
-  @media (max-width: 900px) { .results { grid-template-columns: repeat(2, 1fr); gap: 12px; } .result .value { font-size: 24px; } .result .note { display: none; } }
-  .result {
-    border-radius: 22px; overflow: hidden; border: 1px solid var(--line);
-    background: linear-gradient(160deg, rgba(31, 41, 80, 0.7), rgba(15, 22, 48, 0.5));
-    opacity: 0; transform: translateY(24px) rotateX(12deg); transform-origin: top;
-    transition: opacity .8s ease, transform .9s cubic-bezier(.2, .8, .2, 1);
+  .try form { align-items: flex-end; }
+  .field { display: flex; flex-direction: column; gap: 8px; text-align: left; }
+  .field > span { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory-faint); padding-left: 16px; }
+  .try input[type=text] {
+    background: rgba(255, 255, 255, 0.05); border: 1px solid var(--line); border-radius: 999px; min-width: 200px;
+    color: var(--ivory); font: 500 16px var(--body); padding: 14px 22px;
   }
-  .result.show { opacity: 1; transform: none; }
-  .result .art { aspect-ratio: 4 / 5; background: var(--midnight) center / cover no-repeat; }
-  .result .art.square { aspect-ratio: 1; background-size: 78%; background-color: #0B1430; }
-  .result .body { padding: 18px 20px 22px; }
-  .result .kind { font-size: 11px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); }
-  .result .value { font-family: var(--display); font-size: 32px; line-height: 1.1; margin-top: 6px; }
-  .result .note { font-size: 14px; color: var(--ivory-soft); margin-top: 6px; }
-  .result .big { font-family: var(--display); font-size: 120px; line-height: 1; color: var(--gold-light); display: flex; align-items: center; justify-content: center; aspect-ratio: 4 / 5;
-    background: radial-gradient(circle at 50% 45%, rgba(216, 182, 124, 0.22), transparent 60%), #0B1430; }
+  .try input[type=text]:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 4px rgba(216, 182, 124, 0.15); }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 4px; background: rgba(255, 255, 255, 0.04); }
+  .seg button { background: none; border: 0; color: var(--ivory-soft); font: 600 14px var(--body); padding: 10px 18px; border-radius: 999px; cursor: pointer; }
+  .seg button.on { background: rgba(216, 182, 124, 0.18); color: var(--gold-light); }
+  .results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 50px; text-align: left; }
+  .r {
+    display: grid; grid-template-columns: 64px 1fr; gap: 6px 16px; padding: 22px 22px 24px; border-radius: 20px;
+    background: linear-gradient(160deg, rgba(31, 41, 80, 0.7), rgba(15, 22, 48, 0.5)); border: 1px solid var(--line);
+    opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .8s cubic-bezier(.2, .8, .2, 1), border-color .3s ease;
+  }
+  .r.show { opacity: 1; transform: none; }
+  .r:hover { border-color: rgba(216, 182, 124, 0.5); }
+  .r .ri { grid-row: span 3; width: 64px; height: 64px; }
+  .r .rk { font-size: 10.5px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); align-self: end; }
+  .r .rv { font-family: var(--display); font-size: 25px; line-height: 1.15; }
+  .r p { grid-column: 1 / -1; font-size: 14.5px; line-height: 1.55; color: var(--ivory-soft); margin-top: 8px; }
+  @media (max-width: 980px) { .results { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .results { grid-template-columns: 1fr; } .try form { flex-direction: column; align-items: stretch; } .field input, .seg { width: 100%; } .seg button { flex: 1; } }
   .try .fine { font-size: 13px; color: var(--ivory-faint); margin-top: 22px; }
 
   /* questions */
@@ -345,10 +403,9 @@
   <a class="brand" href="#"><img src="img/icon.png" alt=""><span>Birth Code</span></a>
   <div class="nav">
     <a class="link" href="#try" data-i18n="navTry">Try it</a>
+    <a class="link" href="#ask" data-i18n="navAsk">Ask the cards</a>
     <a class="link" href="#systems" data-i18n="navSystems">Systems</a>
     <a class="link" href="#art" data-i18n="navArt">Your map</a>
-    <a class="link" href="#today" data-i18n="navToday">Your day</a>
-    <a class="link" href="#how" data-i18n="navHow">How it works</a>
     <div class="lang" role="group" aria-label="Language">
       <button type="button" data-lang="en" class="on">EN</button>
       <button type="button" data-lang="ru">RU</button>
@@ -372,14 +429,35 @@
   <section id="try" class="try">
     <div class="wrap">
       <div class="eyebrow reveal" data-i18n="tryEyebrow">Try it now</div>
-      <h2 class="reveal" data-i18n-html="tryTitle">Your birthday already<br><em>knows four things about you.</em></h2>
-      <p class="lede reveal" style="margin-left:auto;margin-right:auto" data-i18n="tryLede">Enter your date of birth. We'll show you your Sun sign, your Life Path number, your Chinese animal and your birth tarot card, calculated exactly as in the app.</p>
+      <h2 class="reveal" data-i18n-html="tryTitle">Try every system.<br><em>One sentence each.</em></h2>
+      <p class="lede reveal" style="margin-left:auto;margin-right:auto" data-i18n="tryLede">Enter your date of birth, and your name if you like. Every system in Birth Code answers in a sentence or two, calculated exactly as in the app. The full reading waits inside.</p>
       <form id="tryForm" class="reveal">
-        <input id="tryDate" type="date" min="1930-01-01" max="2030-12-31" required aria-label="Date of birth">
+        <label class="field"><span data-i18n="fDate">Date of birth</span><input id="tryDate" type="date" min="1930-01-01" max="2030-12-31" required></label>
+        <label class="field"><span data-i18n="fName">First name, optional</span><input id="tryName" type="text" maxlength="40" autocomplete="given-name" data-i18n-ph="fNamePh" placeholder="Karina"></label>
+        <div class="field"><span data-i18n="fSex">For Feng Shui</span>
+          <div class="seg" role="radiogroup"><button type="button" class="on" data-sex="woman" data-i18n="fWoman">Woman</button><button type="button" data-sex="man" data-i18n="fMan">Man</button></div>
+        </div>
         <button class="btn gold" type="submit" data-i18n="tryBtn">Reveal my code</button>
       </form>
       <div id="results" class="results" hidden></div>
       <p class="fine reveal" data-i18n="tryFine">Nothing you type leaves this page.</p>
+    </div>
+  </section>
+
+  <section id="ask" class="ask">
+    <div class="wrap">
+      <div class="eyebrow reveal" data-i18n="askEyebrow">Ask the cards</div>
+      <h2 class="reveal" data-i18n-html="askTitle">A question with<br><em>a yes or a no.</em></h2>
+      <p class="lede reveal" style="margin-left:auto;margin-right:auto" data-i18n="askLede">Hold one clear question in mind, write it if you like, and draw a card from the Birth Code deck.</p>
+      <form id="askForm" class="reveal">
+        <input id="askQ" type="text" maxlength="140" data-i18n-ph="askPh" placeholder="Should I say yes to this?">
+        <button class="btn gold" type="submit" data-i18n="askBtn">Draw a card</button>
+      </form>
+      <div class="askstage">
+        <div class="askcard" id="askCard"><div class="face back"></div><div class="face front" id="askFront"></div></div>
+        <div class="askanswer" id="askAnswer" aria-live="polite"></div>
+      </div>
+      <p class="fine" data-i18n="askFine">A card is a mirror for your own thinking, not a prediction.</p>
     </div>
   </section>
 
@@ -397,7 +475,7 @@
             <p class="panel-lede" id="pLede"></p>
             <ul class="panel-list" id="pList"></ul>
           </div>
-          <div class="panel-art"><img id="pImg" alt=""></div>
+          <div class="panel-art"><div class="artframe" id="pArt"></div></div>
         </article>
       </div>
       <div class="numbers">
@@ -421,23 +499,23 @@
         </svg>
         <div class="stations">
           <figure class="station">
-            <div class="flip"><div class="face back"></div><div class="face front" style="background-image:url('img/leo.jpg')"></div><div class="glare"></div></div>
+            <div class="flip"><div class="face back"></div><div class="face front drawnface" data-art="ascendant"></div><div class="glare"></div></div>
             <figcaption><span class="stepno">I</span><b data-i18n="st1t">Who you are</b><span data-i18n="st1p">Your Ascendant: how you arrive, the self the world meets first.</span></figcaption>
           </figure>
           <figure class="station">
-            <div class="flip"><div class="face back"></div><div class="face front" style="background-image:url('img/water.jpg')"></div><div class="glare"></div></div>
+            <div class="flip"><div class="face back"></div><div class="face front drawnface" data-art="today"></div><div class="glare"></div></div>
             <figcaption><span class="stepno">II</span><b data-i18n="st2t">What you feel</b><span data-i18n="st2p">Your Moon: what you need to feel safe when nobody is watching.</span></figcaption>
           </figure>
           <figure class="station">
-            <div class="flip"><div class="face back"></div><div class="face front" style="background-image:url('img/ren.jpg')"></div><div class="glare"></div></div>
+            <div class="flip"><div class="face back"></div><div class="face front drawnface" data-art="bazi"></div><div class="glare"></div></div>
             <figcaption><span class="stepno">III</span><b data-i18n="st3t">Your nature</b><span data-i18n="st3p">Your Day Master: the element you were born with, in the language of BaZi.</span></figcaption>
           </figure>
           <figure class="station">
-            <div class="flip"><div class="face back"></div><div class="face front mark" style="background-image:url('img/dragon.jpg')"></div><div class="glare"></div></div>
+            <div class="flip"><div class="face back"></div><div class="face front drawnface" data-art="chinese"></div><div class="glare"></div></div>
             <figcaption><span class="stepno">IV</span><b data-i18n="st4t">Your sign in the East</b><span data-i18n="st4p">Your Chinese animal and element, from the real New Year of your birth.</span></figcaption>
           </figure>
           <figure class="station">
-            <div class="flip"><div class="face back"></div><div class="face front" style="background-image:url('img/star.jpg')"></div><div class="glare"></div></div>
+            <div class="flip"><div class="face back"></div><div class="face front drawnface" data-art="matrix"></div><div class="glare"></div></div>
             <figcaption><span class="stepno">V</span><b data-i18n="st5t">Your path</b><span data-i18n="st5p">Your Destiny Matrix and tarot: the direction that asks you to grow.</span></figcaption>
           </figure>
         </div>
@@ -533,6 +611,9 @@
 </footer>
 
 <script src="cny.js"></script>
+<script src="snippets.js"></script>
+<script src="art.js"></script>
+<script src="yesno.js"></script>
 <script>
 /* ---------- the sky: stars, a spiral galaxy, planets on their orbits, the odd shooting star ---------- */
 (() => {
@@ -823,11 +904,12 @@
 
   // the cards turn over one after another as the map comes into view
   const stations = [...document.querySelectorAll('.station')];
+  document.querySelectorAll('.drawnface').forEach((f) => { f.innerHTML = ART(f.dataset.art); });
   const turnIO = new IntersectionObserver((entries) => {
     for (const e of entries) {
       if (!e.isIntersecting) continue;
       const i = stations.indexOf(e.target);
-      setTimeout(() => e.target.classList.add('turned'), reduce ? 0 : 220 * (i % 5));
+      setTimeout(() => { e.target.classList.add('turned'); setTimeout(() => e.target.querySelector('.drawnface').classList.add('drawn'), reduce ? 0 : 500); }, reduce ? 0 : 220 * (i % 5));
       turnIO.unobserve(e.target);
     }
   }, { threshold: 0.35 });
@@ -871,99 +953,189 @@
   }
 })();
 
-/* ---------- try your code: the same rules the app uses ---------- */
+/* ---------- try every system: the same rules the app uses ---------- */
 window.BC = (() => {
   const SIGNS = [
     ['capricorn', '♑︎', 1, 19], ['aquarius', '♒︎', 2, 18], ['pisces', '♓︎', 3, 20], ['aries', '♈︎', 4, 19],
     ['taurus', '♉︎', 5, 20], ['gemini', '♊︎', 6, 20], ['cancer', '♋︎', 7, 22], ['leo', '♌︎', 8, 22],
     ['virgo', '♍︎', 9, 22], ['libra', '♎︎', 10, 22], ['scorpio', '♏︎', 11, 21], ['sagittarius', '♐︎', 12, 21],
   ];
-  // the sign a date falls in: each entry holds the last day of that sign in its month
-  const sunSign = (m, d) => {
-    const i = SIGNS.findIndex(([, , month, last]) => month === m);
-    return d <= SIGNS[i][3] ? SIGNS[i] : SIGNS[(i + 1) % 12];
-  };
-  const digitSum = (n) => String(n).split('').reduce((a, b) => a + Number(b), 0);
-  const reduce = (n) => { let x = n; while (x > 9 && ![11, 22, 33].includes(x)) x = digitSum(x); return x; };
-  // Life Path: reduced month + reduced day + reduced year, reduced again, masters kept
+  const sunSign = (m, d) => { const i = SIGNS.findIndex(([, , month]) => month === m); return d <= SIGNS[i][3] ? SIGNS[i] : SIGNS[(i + 1) % 12]; };
+  const digitSum = (n) => String(Math.abs(n)).split('').reduce((a, b) => a + Number(b), 0);
+  const reduce = (n, masters = true) => { let x = Math.abs(n); while (x > 9 && !(masters && [11, 22, 33].includes(x))) x = digitSum(x); return x; };
+  const single = (n) => { let x = Math.abs(n); while (x > 9) x = digitSum(x); return x; };
   const lifePath = (y, m, d) => reduce(reduce(m) + reduce(d) + reduce(y));
-  // Chinese animal from the real New Year date, not from 1 January
+  const personalYear = (y, m, d, now) => reduce(reduce(m, false) + reduce(d, false) + reduce(now, false), false);
   const ANIMALS = ['rat', 'ox', 'tiger', 'rabbit', 'dragon', 'snake', 'horse', 'goat', 'monkey', 'rooster', 'dog', 'pig'];
-  const animal = (y, m, d) => {
-    const [cm, cd] = (window.CNY || {})[y] || [2, 4];
-    const cy = m < cm || (m === cm && d < cd) ? y - 1 : y;
-    return ANIMALS[(((cy - 1900) % 12) + 12) % 12];
-  };
-  // birth card: day + month + year, digits summed, reduced until 22 or less; 22 is the Fool
+  const chineseYear = (y, m, d) => { const [cm, cd] = (window.CNY || {})[y] || [2, 4]; return m < cm || (m === cm && d < cd) ? y - 1 : y; };
+  const animal = (y, m, d) => ANIMALS[(((chineseYear(y, m, d) - 1900) % 12) + 12) % 12];
+  const element = (y, m, d) => ['wood', 'fire', 'earth', 'metal', 'water'][Math.floor((((chineseYear(y, m, d) - 4) % 10) + 10) % 10 / 2)];
   const birthCard = (y, m, d) => { let x = digitSum(d + m + y); while (x > 22) x = digitSum(x); return x === 22 ? 0 : x; };
-  return { sunSign, lifePath, animal, birthCard };
+  // BaZi Day Master: the day stem of the continuous sexagenary count (27 Jan 2019 = jia zi)
+  const jdn = (y, m, d) => { const a = Math.floor((14 - m) / 12), yy = y + 4800 - a, mm = m + 12 * a - 3; return d + Math.floor((153 * mm + 2) / 5) + 365 * yy + Math.floor(yy / 4) - Math.floor(yy / 100) + Math.floor(yy / 400) - 32045; };
+  const STEMS = ['jia', 'yi', 'bing', 'ding', 'wu', 'ji', 'geng', 'xin', 'ren', 'gui'];
+  const dayMaster = (y, m, d) => STEMS[(((jdn(y, m, d) - 1) % 10) + 10) % 10];
+  // Feng Shui, Eight Mansions: the year turns at the start of spring
+  const kua = (y, m, d, sex) => {
+    const fy = m === 1 || (m === 2 && d < 4) ? y - 1 : y;
+    const r = single(fy % 100), before = fy < 2000;
+    let k = sex === 'man' ? single((before ? 10 : 9) - r) : single((before ? 5 : 6) + r);
+    if (k === 5) k = sex === 'man' ? 2 : 8;
+    if (k === 0) k = 9;
+    return k;
+  };
+  const SHENG_QI = { 1: 'se', 2: 'ne', 3: 's', 4: 'n', 6: 'w', 7: 'nw', 8: 'sw', 9: 'e' };
+  // Pythagoras square: the strongest cell
+  const square = (y, m, d) => {
+    const dd = String(d).padStart(2, '0'), digits = (dd + String(m).padStart(2, '0') + y).split('').map(Number);
+    const w1 = digits.reduce((a, b) => a + b, 0), w2 = digitSum(w1), w3 = Math.abs(w1 - 2 * Number(dd[0])), w4 = digitSum(w3);
+    const all = [...digits, ...String(w1).split(''), ...String(w2).split(''), ...String(w3).split(''), ...String(w4).split('')].map(Number);
+    const cnt = {}; for (let i = 1; i <= 9; i++) cnt[i] = 0; all.forEach((x) => { if (x >= 1) cnt[x]++; });
+    const best = [1, 2, 3, 4, 5, 6, 7, 8, 9].sort((a, b) => cnt[b] - cnt[a])[0];
+    return { best, times: cnt[best] };
+  };
+  // Destiny Matrix, Ladini Classic 22: the centre
+  const r22 = (n) => { let x = n; while (x > 22) x = digitSum(x); return x; };
+  const matrixCentre = (y, m, d) => { const A = r22(d), B = r22(m), C = r22(digitSum(y)), D = r22(A + B + C); return r22(A + B + C + D); };
+  const angel = (lp) => (lp === 11 ? '1111' : lp === 22 ? '2222' : lp === 33 ? '333' : String(lp).repeat(3));
+  const completedAge = (y, m, d, now) => { let a = now.getFullYear() - y; if (now.getMonth() + 1 < m || (now.getMonth() + 1 === m && now.getDate() < d)) a--; return Math.max(0, a); };
+  const chapter = (age) => Math.min(13, Math.floor(age / 7) + 1);
+  const money = (y, m, d) => [single(d), single(m), single(digitSum(y)), single(digitSum(Number(String(d).padStart(2, '0') + String(m).padStart(2, '0') + y)))];
+  const LATIN = { a: 1, j: 1, s: 1, b: 2, k: 2, t: 2, c: 3, l: 3, u: 3, d: 4, m: 4, v: 4, e: 5, n: 5, w: 5, f: 6, o: 6, x: 6, g: 7, p: 7, y: 7, h: 8, q: 8, z: 8, i: 9, r: 9 };
+  const CYR = { 'а': 1, 'б': 2, 'в': 3, 'г': 4, 'д': 5, 'е': 6, 'ё': 7, 'ж': 8, 'з': 9, 'и': 1, 'й': 2, 'к': 3, 'л': 4, 'м': 5, 'н': 6, 'о': 7, 'п': 8, 'р': 9, 'с': 1, 'т': 2, 'у': 3, 'ф': 4, 'х': 5, 'ц': 6, 'ч': 7, 'ш': 8, 'щ': 9, 'ъ': 1, 'ы': 2, 'ь': 3, 'э': 4, 'ю': 5, 'я': 6 };
+  const nameNumber = (name) => {
+    const words = name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').split(/[\s-]+/).filter(Boolean);
+    if (!words.length) return null;
+    const per = words.map((w) => reduce([...w].reduce((a, ch) => a + (LATIN[ch] || CYR[ch] || 0), 0)));
+    const total = per.reduce((a, b) => a + b, 0);
+    return total ? reduce(total) : null;
+  };
+  return { sunSign, lifePath, personalYear, animal, element, birthCard, dayMaster, kua, SHENG_QI, square, matrixCentre, angel, completedAge, chapter, money, nameNumber };
 })();
 
 (() => {
-  const TXT = {
-    en: {
-      sun: 'Your Sun sign', life: 'Your Life Path', animalK: 'Your Chinese animal', card: 'Your birth card',
+  const L = {
+    en: { sun: 'Sun sign', lp: 'Life Path', py: 'Personal year', sq: 'Pythagoras Square', dm: 'BaZi Day Master', cn: 'Chinese sign', fs: 'Feng Shui', bc: 'Birth card', mx: 'Destiny Matrix', an: 'Angel number', ch: 'Life chapter', mo: 'Money code', nm: 'Your name',
       signs: { aries: 'Aries', taurus: 'Taurus', gemini: 'Gemini', cancer: 'Cancer', leo: 'Leo', virgo: 'Virgo', libra: 'Libra', scorpio: 'Scorpio', sagittarius: 'Sagittarius', capricorn: 'Capricorn', aquarius: 'Aquarius', pisces: 'Pisces' },
-      signNote: 'The core of who you are. The app reads it with its house and every other planet.',
-      paths: { 1: 'The one who begins', 2: 'The one who connects', 3: 'The one who expresses', 4: 'The one who builds', 5: 'The one who moves', 6: 'The one who holds', 7: 'The one who understands', 8: 'The one who commands', 9: 'The one who completes', 11: 'The one who illuminates', 22: 'The master builder', 33: 'The one who heals' },
-      animals: { rat: 'Rat', ox: 'Ox', tiger: 'Tiger', rabbit: 'Rabbit', dragon: 'Dragon', snake: 'Snake', horse: 'Horse', goat: 'Goat', monkey: 'Monkey', rooster: 'Rooster', dog: 'Dog', pig: 'Pig' },
-      animalNote: 'From the real Chinese New Year of your birth year, not from 1 January.',
-      cards: ['The Fool', 'The Magician', 'The High Priestess', 'The Empress', 'The Emperor', 'The Hierophant', 'The Lovers', 'The Chariot', 'Strength', 'The Hermit', 'Wheel of Fortune', 'Justice', 'The Hanged Man', 'Death', 'Temperance', 'The Devil', 'The Tower', 'The Star', 'The Moon', 'The Sun', 'Judgement', 'The World'],
-      cardNote: 'The arcana your birthday carries, painted for Birth Code.',
+      dmNames: { jia: 'Jia · yang Wood', yi: 'Yi · yin Wood', bing: 'Bing · yang Fire', ding: 'Ding · yin Fire', wu: 'Wu · yang Earth', ji: 'Ji · yin Earth', geng: 'Geng · yang Metal', xin: 'Xin · yin Metal', ren: 'Ren · yang Water', gui: 'Gui · yin Water' },
+      dirs: { n: 'north', ne: 'north-east', e: 'east', se: 'south-east', s: 'south', sw: 'south-west', w: 'west', nw: 'north-west' },
+      pyLine: (n, t, s2) => `${t}. ${s2}`,
+      sqLine: (c, n, t) => `Your strongest cell is ${t.toLowerCase()}: the digit ${c} appears ${n} times in your square.`,
+      fsLine: (k, g, dir) => `Kua ${k}, ${g} group. Your direction of growth, Sheng Qi, is the ${dir}.`,
+      east: 'east', west: 'west', kuaWord: 'Kua',
+      mxLine: (w, s2) => `The centre of your matrix is ${w.toLowerCase()}. ${s2}`,
+      moLine: (code, t) => `Your money code is ${code}. Its first digit speaks of ${t.toLowerCase()}.`,
+      chLine: (t, q) => `${q}`,
+      nmNeed: 'Add your name above to read its number.',
     },
-    ru: {
-      sun: 'Твой солнечный знак', life: 'Твой путь жизни', animalK: 'Твоё китайское животное', card: 'Твоя карта рождения',
+    ru: { sun: 'Солнечный знак', lp: 'Путь жизни', py: 'Личный год', sq: 'Квадрат Пифагора', dm: 'Господин дня Ба-цзы', cn: 'Китайский знак', fs: 'Фэншуй', bc: 'Карта рождения', mx: 'Матрица судьбы', an: 'Ангельское число', ch: 'Глава жизни', mo: 'Денежный код', nm: 'Твоё имя',
       signs: { aries: 'Овен', taurus: 'Телец', gemini: 'Близнецы', cancer: 'Рак', leo: 'Лев', virgo: 'Дева', libra: 'Весы', scorpio: 'Скорпион', sagittarius: 'Стрелец', capricorn: 'Козерог', aquarius: 'Водолей', pisces: 'Рыбы' },
-      signNote: 'Ядро того, кто ты есть. В приложении он читается вместе с домом и всеми планетами.',
-      paths: { 1: 'Та, кто начинает', 2: 'Та, кто соединяет', 3: 'Та, кто выражает', 4: 'Та, кто строит', 5: 'Та, кто движется', 6: 'Та, кто хранит', 7: 'Та, кто понимает', 8: 'Та, кто управляет', 9: 'Та, кто завершает', 11: 'Та, кто озаряет', 22: 'Мастер-строитель', 33: 'Та, кто исцеляет' },
-      animals: { rat: 'Крыса', ox: 'Бык', tiger: 'Тигр', rabbit: 'Кролик', dragon: 'Дракон', snake: 'Змея', horse: 'Лошадь', goat: 'Коза', monkey: 'Обезьяна', rooster: 'Петух', dog: 'Собака', pig: 'Свинья' },
-      animalNote: 'По настоящему китайскому Новому году твоего года рождения, а не с 1 января.',
-      cards: ['Шут', 'Маг', 'Верховная Жрица', 'Императрица', 'Император', 'Иерофант', 'Влюблённые', 'Колесница', 'Сила', 'Отшельник', 'Колесо Фортуны', 'Справедливость', 'Повешенный', 'Смерть', 'Умеренность', 'Дьявол', 'Башня', 'Звезда', 'Луна', 'Солнце', 'Суд', 'Мир'],
-      cardNote: 'Аркан, который несёт твой день рождения, написанный для Birth Code.',
+      dmNames: { jia: 'Цзя · ян Дерево', yi: 'И · инь Дерево', bing: 'Бин · ян Огонь', ding: 'Дин · инь Огонь', wu: 'У · ян Земля', ji: 'Цзи · инь Земля', geng: 'Гэн · ян Металл', xin: 'Синь · инь Металл', ren: 'Жэнь · ян Вода', gui: 'Гуй · инь Вода' },
+      dirs: { n: 'север', ne: 'северо-восток', e: 'восток', se: 'юго-восток', s: 'юг', sw: 'юго-запад', w: 'запад', nw: 'северо-запад' },
+      pyLine: (n, t, s2) => `${t}. ${s2}`,
+      sqLine: (c, n, t) => `Твоя самая сильная клетка: ${t.toLowerCase()}. Цифра ${c} встречается в квадрате ${n} раз.`,
+      fsLine: (k, g, dir) => `Гуа ${k}, ${g} группа. Твоё направление роста, Шэн Ци: ${dir}.`,
+      east: 'восточная', west: 'западная', kuaWord: 'Гуа',
+      mxLine: (w, s2) => `Центр твоей матрицы: ${w.toLowerCase()}. ${s2}`,
+      moLine: (code, t) => `Твой денежный код ${code}. Его первая цифра говорит о теме: ${t.toLowerCase()}.`,
+      chLine: (t, q) => `${q}`,
+      nmNeed: 'Добавь имя выше, чтобы прочитать его число.',
     },
   };
   const form = document.getElementById('tryForm');
   const out = document.getElementById('results');
-  let lastDate = null;
+  let sex = 'woman', last = null;
+  form.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => {
+    sex = b.dataset.sex; form.querySelectorAll('.seg button').forEach((x) => x.classList.toggle('on', x === b)); if (last) render();
+  }));
+
+  const card = (art, kind, value, text) => `<div class="r"><div class="ri">${ART(art)}</div><div class="rk">${kind}</div><div class="rv">${value}</div><p>${text}</p></div>`;
 
   function render() {
-    if (!lastDate) return;
     const lang = document.documentElement.lang === 'ru' ? 'ru' : 'en';
-    const T = TXT[lang];
-    const [y, m, d] = lastDate;
+    const T = L[lang], S = window.SNIP[lang], EN = window.SNIP.en;
+    const [y, m, d] = last.date, now = new Date();
     const [sign, glyph] = BC.sunSign(m, d);
     const lp = BC.lifePath(y, m, d);
-    const an = BC.animal(y, m, d);
-    const card = BC.birthCard(y, m, d);
-    out.innerHTML = `
-      <div class="result"><div class="art" style="background-image:url('img/energy/${sign}.jpg')"></div>
-        <div class="body"><div class="kind">${T.sun}</div><div class="value">${glyph} ${T.signs[sign]}</div><div class="note">${T.signNote}</div></div></div>
-      <div class="result"><div class="big">${lp}</div>
-        <div class="body"><div class="kind">${T.life}</div><div class="value">${T.paths[lp]}</div></div></div>
-      <div class="result"><div class="art square" style="background-image:url('img/animals/${an}.jpg')"></div>
-        <div class="body"><div class="kind">${T.animalK}</div><div class="value">${T.animals[an]}</div><div class="note">${T.animalNote}</div></div></div>
-      <div class="result"><div class="art" style="background-image:url('img/tarot/${card}.jpg')"></div>
-        <div class="body"><div class="kind">${T.card}</div><div class="value">${T.cards[card]}</div><div class="note">${T.cardNote}</div></div></div>`;
+    const py = BC.personalYear(y, m, d, now.getFullYear());
+    const sq = BC.square(y, m, d);
+    const dm = BC.dayMaster(y, m, d);
+    const an = BC.animal(y, m, d), el = BC.element(y, m, d);
+    const k = BC.kua(y, m, d, sex);
+    const bc = BC.birthCard(y, m, d);
+    const mx = BC.matrixCentre(y, m, d);
+    const ag = BC.angel(lp);
+    const ch = BC.chapter(BC.completedAge(y, m, d, now));
+    const mo = BC.money(y, m, d);
+    const nn = last.name ? BC.nameNumber(last.name) : null;
+    const mxT = (S.matrix || EN.matrix)[mx];
+    const cards = [
+      card('natal', T.sun, `${glyph} ${T.signs[sign]}`, S.sun[sign]),
+      card('numerology', T.lp, `${lp} · ${S.lifePath[lp].t}`, S.lifePath[lp].s),
+      card('cycles', `${T.py} ${now.getFullYear()}`, String(py), T.pyLine(py, S.personalYear[py].t, S.personalYear[py].s)),
+      card('square', T.sq, `${sq.best} · ${S.cells[sq.best]}`, T.sqLine(sq.best, sq.times, S.cells[sq.best])),
+      card('bazi', T.dm, T.dmNames[dm], (S.dayMasters || EN.dayMasters)[dm]),
+      card('chinese', T.cn, `${S.elements[el]} · ${S.animals[an].n}`, S.animals[an].s),
+      card('fengshui', T.fs, `${T.kuaWord} ${k}`, T.fsLine(k, [1, 3, 4, 9].includes(k) ? T.east : T.west, T.dirs[BC.SHENG_QI[k]])),
+      card('tarot', T.bc, S.birth[bc].n, S.birth[bc].s),
+      card('matrix', T.mx, `${mx} · ${mxT.w}`, T.mxLine(mxT.w, mxT.s)),
+      card('angels', T.an, `${ag} · ${S.angels[ag].t}`, S.angels[ag].s),
+      card('cycles', T.ch, `${ch} · ${S.chapters[ch].t}`, T.chLine(S.chapters[ch].t, S.chapters[ch].q)),
+      card('money', T.mo, mo.join(''), T.moLine(mo.join(''), S.money[mo[0]])),
+      nn ? card('name', `${T.nm} · ${last.name}`, `${nn} · ${S.expression[nn].t}`, S.expression[nn].s) : card('name', T.nm, '·', T.nmNeed),
+    ];
+    out.innerHTML = cards.join('');
     out.hidden = false;
-    [...out.children].forEach((el, i) => setTimeout(() => el.classList.add('show'), 80 + i * 180));
+    [...out.children].forEach((el2, i) => setTimeout(() => { el2.classList.add('show'); el2.classList.add('drawn'); }, 60 + i * 110));
   }
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const v = document.getElementById('tryDate').value;
     if (!v) return;
-    lastDate = v.split('-').map(Number);
+    last = { date: v.split('-').map(Number), name: document.getElementById('tryName').value.trim() };
     render();
-    out.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    out.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
-  // redraw the answers when the language changes
-  new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+  new MutationObserver(() => { if (last) render(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+})();
+
+/* ---------- ask the cards: one card from the major arcana, yes, no or maybe ---------- */
+(() => {
+  const form = document.getElementById('askForm'); if (!form) return;
+  const cardEl = document.getElementById('askCard'), front = document.getElementById('askFront'), answer = document.getElementById('askAnswer');
+  const WORD = { en: { yes: 'Yes', no: 'No', maybe: 'Maybe' }, ru: { yes: 'Да', no: 'Нет', maybe: 'Возможно' } };
+  let drawn = null, question = '';
+  const show = () => {
+    if (drawn === null) return;
+    const lang = document.documentElement.lang === 'ru' ? 'ru' : 'en', c = window.YESNO[lang][drawn];
+    answer.innerHTML = `${question ? `<div class="q">“${question.replace(/[<>&]/g, '')}”</div>` : ''}<div class="verdict">${WORD[lang][c.a]}</div><div class="cardname">${c.n}</div><p>${c.w}</p>`;
+  };
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    question = document.getElementById('askQ').value.trim();
+    // a fair draw: any of the 22 cards, from the browser's cryptographic randomness
+    const r = new Uint32Array(1); crypto.getRandomValues(r);
+    const next = r[0] % 22;
+    answer.classList.remove('show');
+    cardEl.classList.remove('open');
+    setTimeout(() => {
+      cardEl.classList.add('shuffle');
+      setTimeout(() => {
+        cardEl.classList.remove('shuffle');
+        drawn = next; front.style.backgroundImage = `url('img/tarot/${next}.jpg')`;
+        show();
+        cardEl.classList.add('open'); answer.classList.add('show');
+      }, 900);
+    }, cardEl.classList.contains('open') ? 700 : 0);
+  });
+  new MutationObserver(show).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
 })();
 
 /* ---------- the explorer: every system and what it gives you ---------- */
 (() => {
   const SYS = [
-    { g: '✎', img: 'img/star.jpg', en: {
+    { g: '✎', art: 'name', en: {
         tab: 'The secret of your name', kicker: 'Your name', title: 'What your name carries',
         lede: 'Your name, researched from name books and history, written for your own spelling, with its numbers and what changes when a surname changes.',
         list: ['Meaning and origin', 'The story behind the name', 'The roots it grew from', 'Name energy and archetype', 'Personality, strengths and shadow', 'The life path of your name', 'Love, career and social image', 'The name across cultures', 'Name days and famous namesakes', 'Numerology of the name', 'Surname and full-name numbers', 'Name change analysis'] },
@@ -971,7 +1143,7 @@ window.BC = (() => {
         tab: 'Тайна твоего имени', kicker: 'Твоё имя', title: 'Что несёт твоё имя',
         lede: 'Твоё имя, изученное по книгам имён и истории, в твоём собственном написании, с его числами и тем, что меняется со сменой фамилии.',
         list: ['Значение и происхождение', 'История имени', 'Корни, из которых оно выросло', 'Энергия и архетип имени', 'Характер, сильные стороны и тень', 'Путь твоего имени', 'Любовь, карьера и впечатление', 'Имя в разных культурах', 'Дни имени и известные тёзки', 'Нумерология имени', 'Числа фамилии и полного имени', 'Анализ смены имени'] } },
-    { g: '☉', img: 'img/leo.jpg', en: {
+    { g: '☉', art: 'natal', en: {
         tab: 'Your natal chart', kicker: 'Astrology', title: 'Every planet, a chapter of you',
         lede: 'Your chart calculated to the minute, then read as a story: each planet answers a different question about the same person.',
         list: ['Your identity (Sun)', 'Your Ascendant and first impression', 'Your public image (Midheaven)', 'The twelve life areas', 'House rulers and empty houses', 'Aspects between your planets', 'Your dominant sign, planet and element', 'North and South Nodes', 'Lilith and Chiron', 'Your sign photos and style guidance'] },
@@ -979,7 +1151,7 @@ window.BC = (() => {
         tab: 'Твоя натальная карта', kicker: 'Астрология', title: 'Каждая планета как глава о тебе',
         lede: 'Твоя карта, рассчитанная до минуты и прочитанная как история: каждая планета отвечает на свой вопрос об одном и том же человеке.',
         list: ['Твоя личность (Солнце)', 'Асцендент и первое впечатление', 'Публичный образ (Середина неба)', 'Двенадцать сфер жизни', 'Управители домов и пустые дома', 'Аспекты между планетами', 'Доминирующий знак, планета и стихия', 'Северный и Южный узлы', 'Лилит и Хирон', 'Фото твоих знаков и стиль'] } },
-    { g: '7', img: 'img/sun.jpg', en: {
+    { g: '7', art: 'numerology', en: {
         tab: 'Numerology', kicker: 'Your numbers', title: 'The numbers of your date and name',
         lede: 'Pythagorean numerology with master numbers kept, each number shown with its working, what it means in love, money and work, and what brings it into minus.',
         list: ['Life Path', 'Expression, Soul and Personality', 'Birthday and Maturity numbers', 'Personal Year, Month and Day', 'Your next nine years', 'Pinnacles and Challenges', 'Karmic lessons and karmic debts', 'Hidden passion', 'Your money code', 'How to use each number'] },
@@ -987,7 +1159,7 @@ window.BC = (() => {
         tab: 'Нумерология', kicker: 'Твои числа', title: 'Числа твоей даты и имени',
         lede: 'Пифагорейская нумерология с мастер-числами, каждое число с расчётом, значением в любви, деньгах и работе и тем, что выводит его в минус.',
         list: ['Число жизненного пути', 'Выражение, Душа и Личность', 'Числа дня рождения и зрелости', 'Личный год, месяц и день', 'Твои ближайшие девять лет', 'Пики и испытания', 'Кармические уроки и долги', 'Скрытая страсть', 'Твой денежный код', 'Как использовать каждое число'] } },
-    { g: '⊞', img: 'img/moon.jpg', en: {
+    { g: '⊞', art: 'square', en: {
         tab: 'Pythagoras Square', kicker: 'Your character grid', title: 'Nine cells, eight lines, one portrait',
         lede: 'The psychomatrix of your birth date: how strong each quality is, where you are full and where you build consciously, and a summary in plain words.',
         list: ['Character and will', 'Energy', 'Precision and curiosity', 'Physical resource', 'Logic and intuition', 'Diligence', 'Luck', 'Duty and kindness', 'Memory and mind', 'Eight lines of the square', 'Your summary'] },
@@ -995,7 +1167,7 @@ window.BC = (() => {
         tab: 'Квадрат Пифагора', kicker: 'Сетка характера', title: 'Девять клеток, восемь линий, один портрет',
         lede: 'Психоматрица твоей даты: насколько сильно каждое качество, где ты наполнена и что развиваешь осознанно, и итог простыми словами.',
         list: ['Характер и воля', 'Энергия', 'Интерес и точность', 'Физический ресурс', 'Логика и интуиция', 'Трудолюбие', 'Удача', 'Долг и доброта', 'Память и ум', 'Восемь линий квадрата', 'Твой итог'] } },
-    { g: '☯', img: 'img/ren.jpg', en: {
+    { g: '☯', art: 'bazi', en: {
         tab: 'BaZi', kicker: 'Four Pillars of Destiny', title: 'Your elemental blueprint',
         lede: 'The eight characters of your birth, from true solar time and the solar terms, with every calculation traced and the convention named.',
         list: ['Your four pillars', 'Your Day Master', 'Hidden stems', 'The five elements, weighted', 'Day Master strength and why', 'The ten gods', 'Chart dynamics', 'Supportive elements', 'Ten-year luck pillars', 'Your current year', 'How it was calculated'] },
@@ -1003,7 +1175,7 @@ window.BC = (() => {
         tab: 'Ба-цзы', kicker: 'Четыре столпа судьбы', title: 'Твой элементальный чертёж',
         lede: 'Восемь знаков твоего рождения, по истинному солнечному времени и солнечным сезонам, с прослеженным расчётом и названной методикой.',
         list: ['Твои четыре столпа', 'Твой Господин дня', 'Скрытые стволы', 'Пять стихий с весами', 'Сила Господина дня и почему', 'Десять божеств', 'Динамика карты', 'Поддерживающие стихии', 'Десятилетние циклы удачи', 'Твой текущий год', 'Как это посчитано'] } },
-    { g: '☷', img: 'img/water.jpg', en: {
+    { g: '☷', art: 'fengshui', en: {
         tab: 'Feng Shui', kicker: 'Your space', title: 'Your directions and balance',
         lede: 'Personal Feng Shui from the Eight Mansions school, kept apart from the analysis of your home, which needs your real floor plan and orientation.',
         list: ['Your Kua number', 'Your trigram', 'Your personal element', 'East or west group', 'Four supportive directions', 'Four less supportive directions', 'Sleeping and desk direction', 'The five elements in space'] },
@@ -1011,7 +1183,7 @@ window.BC = (() => {
         tab: 'Фэншуй', kicker: 'Твоё пространство', title: 'Твои направления и баланс',
         lede: 'Личный фэншуй по школе Восьми дворцов, отдельно от анализа дома, которому нужны настоящий план и ориентация.',
         list: ['Твоё число Гуа', 'Твоя триграмма', 'Твоя личная стихия', 'Восточная или западная группа', 'Четыре поддерживающих направления', 'Четыре менее поддерживающих', 'Направление сна и рабочего стола', 'Пять стихий в пространстве'] } },
-    { g: '龍', img: 'img/dragon.jpg', en: {
+    { g: '龍', art: 'chinese', en: {
         tab: 'Chinese astrology', kicker: 'Your sign in the East', title: 'Your animal and element',
         lede: 'Your Chinese sign from the real New Year of your birth year, with its element, yin or yang, and the animals that suit you.',
         list: ['Your animal', 'Your element', 'Yin and yang', 'Allies, secret friend and opposite', 'Compatibility of signs', 'This Chinese year', 'All twelve animals'] },
@@ -1019,7 +1191,7 @@ window.BC = (() => {
         tab: 'Китайская астрология', kicker: 'Твой знак Востока', title: 'Твоё животное и стихия',
         lede: 'Твой китайский знак по настоящему Новому году твоего рождения, со стихией, инь или ян и животными, которые тебе подходят.',
         list: ['Твоё животное', 'Твоя стихия', 'Инь и ян', 'Союзники, тайный друг и противоположность', 'Совместимость знаков', 'Этот китайский год', 'Все двенадцать животных'] } },
-    { g: '✧', img: 'img/back.jpg', en: {
+    { g: '✧', art: 'matrix', en: {
         tab: 'Tarot and the Matrix', kicker: 'Your arcana', title: 'Cards painted for your story',
         lede: 'A tarot deck painted for Birth Code, your birth cards, readings for every question, and the Destiny Matrix of the twenty-two arcana.',
         list: ['Your personality and soul cards', 'Your card of the year', 'Eleven spreads', 'Love, money and career readings', 'Yes or no, past-present-future', 'The meaning of every card', 'The Destiny Matrix', 'Personal, social and spiritual purpose', 'Money and relationship lines', 'Karmic tail and ancestral lines'] },
@@ -1027,7 +1199,7 @@ window.BC = (() => {
         tab: 'Таро и Матрица', kicker: 'Твои арканы', title: 'Карты, написанные для твоей истории',
         lede: 'Колода Таро, написанная для Birth Code, твои карты рождения, расклады на любой вопрос и Матрица судьбы из двадцати двух арканов.',
         list: ['Карты личности и души', 'Карта твоего года', 'Одиннадцать раскладов', 'Расклады на любовь, деньги и карьеру', 'Да или нет, прошлое-настоящее-будущее', 'Значение каждой карты', 'Матрица судьбы', 'Личное, социальное и духовное предназначение', 'Денежная линия и линия отношений', 'Кармический хвост и родовые линии'] } },
-    { g: '◷', img: 'img/fire.jpg', en: {
+    { g: '◷', art: 'cycles', en: {
         tab: 'Life cycles', kicker: 'Your timing', title: 'Where you are in your story',
         lede: 'The time layer of your code: which chapter you are living, which part of your chart is emphasised this year, and the great planetary rhythms ahead.',
         list: ['Your current chapter', 'Your seven-year chapters', 'Your profection year', 'The lord of your year', 'Jupiter and Saturn returns', 'Saturn opposition', 'Node return and opposition', 'Uranus opposition', 'Chiron return', 'Real dates, never averages'] },
@@ -1035,7 +1207,7 @@ window.BC = (() => {
         tab: 'Жизненные циклы', kicker: 'Твоё время', title: 'Где ты сейчас в своей истории',
         lede: 'Временной слой твоего кода: какую главу ты проживаешь, какая часть карты выделена в этом году и большие планетарные ритмы впереди.',
         list: ['Твоя текущая глава', 'Твои семилетние главы', 'Твой профекционный год', 'Управитель года', 'Возвращения Юпитера и Сатурна', 'Оппозиция Сатурна', 'Возвращение и оппозиция узлов', 'Оппозиция Урана', 'Возвращение Хирона', 'Настоящие даты, а не средние'] } },
-    { g: '✶', img: 'img/pisces.jpg', en: {
+    { g: '✶', art: 'angels', en: {
         tab: 'Angel numbers', kicker: 'Signs you keep seeing', title: 'The numbers that find you',
         lede: 'Your personal angel number from your Life Path, and the meaning of the repeating numbers the day keeps showing you.',
         list: ['Your personal angel number', '000 to 999', '1111, 1212 and 1010', 'Mirror hours', 'In love, money and career', 'How to work with them'] },
@@ -1057,7 +1229,8 @@ window.BC = (() => {
       document.getElementById('pTitle').textContent = T.title;
       document.getElementById('pLede').textContent = T.lede;
       document.getElementById('pList').innerHTML = T.list.map((x) => `<li>${x}</li>`).join('');
-      const img = document.getElementById('pImg'); img.src = S.img; img.alt = T.tab;
+      const box = document.getElementById('pArt');
+      box.classList.remove('drawn'); box.innerHTML = ART(S.art); void box.offsetWidth; box.classList.add('drawn');
       panel.classList.remove('swap');
     };
     if (animate) { panel.classList.add('swap'); setTimeout(apply, 260); } else apply();
@@ -1108,10 +1281,15 @@ window.BC = (() => {
     fTitle: 'Твой код давно ждёт.<br><em>Приходи его прочитать.</em>',
     fCta: 'Скоро в App Store', fSoon: 'iPhone · русский и английский',
     footNote: 'Сделано с любовью, под звёздами.',
-    navTry: 'Попробовать',
+    navTry: 'Попробовать', navAsk: 'Спроси карты',
     tryEyebrow: 'Попробуй сейчас',
-    tryTitle: 'Твой день рождения уже<br><em>знает о тебе четыре вещи.</em>',
-    tryLede: 'Введи дату рождения. Мы покажем твой солнечный знак, число жизненного пути, китайское животное и карту Таро рождения, посчитанные точно так же, как в приложении.',
+    askEyebrow: 'Спроси карты', askTitle: 'Вопрос, на который<br><em>есть да или нет.</em>',
+    askLede: 'Держи в мыслях один ясный вопрос, напиши его, если хочешь, и вытяни карту из колоды Birth Code.',
+    askPh: 'Стоит ли мне согласиться?', askBtn: 'Вытянуть карту', askFine: 'Карта это зеркало для твоих мыслей, а не предсказание.',
+    fNamePh: 'Карина',
+    fDate: 'Дата рождения', fName: 'Имя, по желанию', fSex: 'Для фэншуй', fWoman: 'Женщина', fMan: 'Мужчина',
+    tryTitle: 'Попробуй каждую систему.<br><em>По одной фразе.</em>',
+    tryLede: 'Введи дату рождения и, если хочешь, имя. Каждая система Birth Code ответит одной-двумя фразами, посчитанными точно как в приложении. Полное прочтение ждёт внутри.',
     tryBtn: 'Открыть мой код', tryFine: 'Ничего из введённого не покидает эту страницу.',
     n1: 'традиций', n2: 'карт Таро, написанных вручную', n3: 'изученных имён', n4: 'языка',
     faqEyebrow: 'Вопросы', faqTitle: 'Прежде чем <em>начать.</em>',
@@ -1141,7 +1319,8 @@ window.BC = (() => {
     q9: 'Это только для женщин?', a9: 'Birth Code написан с мыслью о женщинах, по тону и по советам об образе и стиле. Мужчины тоже могут прочитать свой код, в сокращённой версии.',
     q5: 'Где хранятся мои данные?', a5: 'Твои данные рождения хранятся на твоём телефоне. Чтобы прочитать свой код, аккаунт не нужен.',
   };
-  const EN = {};
+  const EN = {}, PH = {};
+  document.querySelectorAll('[data-i18n-ph]').forEach((el) => { PH[el.dataset.i18nPh] = el.placeholder; });
   document.querySelectorAll('[data-i18n]').forEach((el) => { EN[el.dataset.i18n] = el.textContent; });
   document.querySelectorAll('[data-i18n-html]').forEach((el) => { EN[el.dataset.i18nHtml] = el.innerHTML; });
 
@@ -1150,6 +1329,7 @@ window.BC = (() => {
     document.documentElement.lang = lang;
     document.querySelectorAll('[data-i18n]').forEach((el) => { if (dict[el.dataset.i18n]) el.textContent = dict[el.dataset.i18n]; });
     document.querySelectorAll('[data-i18n-html]').forEach((el) => { if (dict[el.dataset.i18nHtml]) el.innerHTML = dict[el.dataset.i18nHtml]; });
+    document.querySelectorAll('[data-i18n-ph]').forEach((el) => { const k = el.dataset.i18nPh; if (lang === 'ru' ? RU[k] : PH[k]) el.placeholder = lang === 'ru' ? RU[k] : PH[k]; });
     document.querySelectorAll('.lang button').forEach((b) => b.classList.toggle('on', b.dataset.lang === lang));
     try { localStorage.setItem('bc-lang', lang); } catch (e) {}
   }
