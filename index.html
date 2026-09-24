@@ -394,6 +394,7 @@
     html { scroll-behavior: auto; }
   }
 </style>
+<link rel="stylesheet" href="journey.css">
 </head>
 <body>
 <canvas id="sky" aria-hidden="true"></canvas>
@@ -405,7 +406,7 @@
     <a class="link" href="#try" data-i18n="navTry">Try it</a>
     <a class="link" href="#ask" data-i18n="navAsk">Ask the cards</a>
     <a class="link" href="#systems" data-i18n="navSystems">Systems</a>
-    <a class="link" href="#art" data-i18n="navArt">Your map</a>
+    <a class="link" href="#journey" data-i18n="navJourney">Journey</a>
     <div class="lang" role="group" aria-label="Language">
       <button type="button" data-lang="en" class="on">EN</button>
       <button type="button" data-lang="ru">RU</button>
@@ -415,6 +416,7 @@
 
 <main>
   <section class="hero">
+    <canvas id="dust" aria-hidden="true"></canvas>
     <div class="ring" aria-hidden="true"><svg viewBox="0 0 1000 1000"><circle cx="500" cy="500" r="455" fill="none" stroke="rgba(216,182,124,0.35)" stroke-width="1"/><circle cx="500" cy="500" r="395" fill="none" stroke="rgba(216,182,124,0.18)" stroke-width="1"/><text x="610.0" y="89.5" text-anchor="middle" dominant-baseline="central">♈︎</text><line x1="500.0" y1="105.0" x2="500.0" y2="45.0" stroke="rgba(216,182,124,0.35)" stroke-width="1"/><text x="800.5" y="199.5" text-anchor="middle" dominant-baseline="central">♉︎</text><line x1="697.5" y1="157.9" x2="727.5" y2="106.0" stroke="rgba(216,182,124,0.35)" stroke-width="1"/><text x="910.5" y="390.0" text-anchor="middle" dominant-baseline="central">♊︎</text><line x1="842.1" y1="302.5" x2="894.0" y2="272.5" stroke="rgba(216,182,124,0.35)" stroke-width="1"/><text x="910.5" y="610.0" text-anchor="middle" dominant-baseline="central">♋︎</text><line x1="895.0" y1="500.0" x2="955.0" y2="500.0" stroke="rgba(216,182,124,0.35)" stroke-width="1"/><text x="800.5" y="800.5" text-anchor="middle" dominant-baseline="central">♌︎</text><line x1="842.1" y1="697.5" x2="894.0" y2="727.5" stroke="rgba(216,182,124,0.35)" stroke-width="1"/><text x="610.0" y="910.5" text-anchor="middle" dominant-baseline="central">♍︎</text><line x1="697.5" y1="842.1" x2="727.5" y2="894.0" stroke="rgba(216,182,124,0.35)" stroke-width="1"/><text x="390.0" y="910.5" text-anchor="middle" dominant-baseline="central">♎︎</text><line x1="500.0" y1="895.0" x2="500.0" y2="955.0" stroke="rgba(216,182,124,0.35)" stroke-width="1"/><text x="199.5" y="800.5" text-anchor="middle" dominant-baseline="central">♏︎</text><line x1="302.5" y1="842.1" x2="272.5" y2="894.0" stroke="rgba(216,182,124,0.35)" stroke-width="1"/><text x="89.5" y="610.0" text-anchor="middle" dominant-baseline="central">♐︎</text><line x1="157.9" y1="697.5" x2="106.0" y2="727.5" stroke="rgba(216,182,124,0.35)" stroke-width="1"/><text x="89.5" y="390.0" text-anchor="middle" dominant-baseline="central">♑︎</text><line x1="105.0" y1="500.0" x2="45.0" y2="500.0" stroke="rgba(216,182,124,0.35)" stroke-width="1"/><text x="199.5" y="199.5" text-anchor="middle" dominant-baseline="central">♒︎</text><line x1="157.9" y1="302.5" x2="106.0" y2="272.5" stroke="rgba(216,182,124,0.35)" stroke-width="1"/><text x="390.0" y="89.5" text-anchor="middle" dominant-baseline="central">♓︎</text><line x1="302.5" y1="157.9" x2="272.5" y2="106.0" stroke="rgba(216,182,124,0.35)" stroke-width="1"/><line x1="955.0" y1="500.0" x2="963.0" y2="500.0" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="953.3" y1="539.7" x2="961.2" y2="540.4" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="948.1" y1="579.0" x2="956.0" y2="580.4" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="939.5" y1="617.8" x2="947.2" y2="619.8" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="927.6" y1="655.6" x2="935.1" y2="658.4" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="912.4" y1="692.3" x2="919.6" y2="695.7" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="894.0" y1="727.5" x2="901.0" y2="731.5" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="872.7" y1="761.0" x2="879.3" y2="765.6" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="848.6" y1="792.5" x2="854.7" y2="797.6" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="821.7" y1="821.7" x2="827.4" y2="827.4" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="792.5" y1="848.6" x2="797.6" y2="854.7" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="761.0" y1="872.7" x2="765.6" y2="879.3" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="727.5" y1="894.0" x2="731.5" y2="901.0" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="692.3" y1="912.4" x2="695.7" y2="919.6" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="655.6" y1="927.6" x2="658.4" y2="935.1" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="617.8" y1="939.5" x2="619.8" y2="947.2" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="579.0" y1="948.1" x2="580.4" y2="956.0" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="539.7" y1="953.3" x2="540.4" y2="961.2" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="500.0" y1="955.0" x2="500.0" y2="963.0" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="460.3" y1="953.3" x2="459.6" y2="961.2" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="421.0" y1="948.1" x2="419.6" y2="956.0" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="382.2" y1="939.5" x2="380.2" y2="947.2" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="344.4" y1="927.6" x2="341.6" y2="935.1" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="307.7" y1="912.4" x2="304.3" y2="919.6" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="272.5" y1="894.0" x2="268.5" y2="901.0" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="239.0" y1="872.7" x2="234.4" y2="879.3" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="207.5" y1="848.6" x2="202.4" y2="854.7" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="178.3" y1="821.7" x2="172.6" y2="827.4" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="151.4" y1="792.5" x2="145.3" y2="797.6" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="127.3" y1="761.0" x2="120.7" y2="765.6" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="106.0" y1="727.5" x2="99.0" y2="731.5" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="87.6" y1="692.3" x2="80.4" y2="695.7" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="72.4" y1="655.6" x2="64.9" y2="658.4" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="60.5" y1="617.8" x2="52.8" y2="619.8" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="51.9" y1="579.0" x2="44.0" y2="580.4" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="46.7" y1="539.7" x2="38.8" y2="540.4" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="45.0" y1="500.0" x2="37.0" y2="500.0" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="46.7" y1="460.3" x2="38.8" y2="459.6" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="51.9" y1="421.0" x2="44.0" y2="419.6" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="60.5" y1="382.2" x2="52.8" y2="380.2" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="72.4" y1="344.4" x2="64.9" y2="341.6" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="87.6" y1="307.7" x2="80.4" y2="304.3" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="106.0" y1="272.5" x2="99.0" y2="268.5" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="127.3" y1="239.0" x2="120.7" y2="234.4" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="151.4" y1="207.5" x2="145.3" y2="202.4" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="178.3" y1="178.3" x2="172.6" y2="172.6" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="207.5" y1="151.4" x2="202.4" y2="145.3" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="239.0" y1="127.3" x2="234.4" y2="120.7" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="272.5" y1="106.0" x2="268.5" y2="99.0" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="307.7" y1="87.6" x2="304.3" y2="80.4" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="344.4" y1="72.4" x2="341.6" y2="64.9" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="382.2" y1="60.5" x2="380.2" y2="52.8" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="421.0" y1="51.9" x2="419.6" y2="44.0" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="460.3" y1="46.7" x2="459.6" y2="38.8" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="500.0" y1="45.0" x2="500.0" y2="37.0" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="539.7" y1="46.7" x2="540.4" y2="38.8" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="579.0" y1="51.9" x2="580.4" y2="44.0" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="617.8" y1="60.5" x2="619.8" y2="52.8" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="655.6" y1="72.4" x2="658.4" y2="64.9" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="692.3" y1="87.6" x2="695.7" y2="80.4" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="727.5" y1="106.0" x2="731.5" y2="99.0" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="761.0" y1="127.3" x2="765.6" y2="120.7" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="792.5" y1="151.4" x2="797.6" y2="145.3" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="821.7" y1="178.3" x2="827.4" y2="172.6" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="848.6" y1="207.5" x2="854.7" y2="202.4" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="872.7" y1="239.0" x2="879.3" y2="234.4" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="894.0" y1="272.5" x2="901.0" y2="268.5" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="912.4" y1="307.7" x2="919.6" y2="304.3" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="927.6" y1="344.4" x2="935.1" y2="341.6" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="939.5" y1="382.2" x2="947.2" y2="380.2" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="948.1" y1="421.0" x2="956.0" y2="419.6" stroke="rgba(216,182,124,0.3)" stroke-width="1"/><line x1="953.3" y1="460.3" x2="961.2" y2="459.6" stroke="rgba(216,182,124,0.3)" stroke-width="1"/></svg></div>
     <div class="eyebrow" data-i18n="eyebrow">Your personal code</div>
     <h1>Birth Code</h1>
@@ -424,6 +426,78 @@
       <a class="btn ghost" href="#systems" data-i18n="ctaSecond">Explore what's inside</a>
     </div>
     <div class="scroll-hint" data-i18n="scroll">Scroll</div>
+  </section>
+
+  <section id="journey" class="jr">
+    <div class="jr-intro">
+      <div class="eyebrow reveal" data-i18n="jrEyebrow">Your journey</div>
+      <h2 class="reveal" data-i18n-html="jrTitle">From one moment<br><em>to a whole life.</em></h2>
+      <p class="lede reveal" data-i18n="jrLede">Six steps, from the minute you were born to a portrait of who you are. Scroll, and walk through Birth Code the way you will on your phone.</p>
+    </div>
+    <div class="jr-track">
+      <div class="jr-sticky">
+        <canvas class="jr-dust" aria-hidden="true"></canvas>
+        <div class="jr-bignum" aria-hidden="true">01</div>
+        <div class="jr-text">
+          <article class="jr-step"><span class="n">01</span><h3 data-i18n-html="jr1t">Your birth <em>moment</em></h3><p data-i18n="jr1p">Date, time and place. Birth Code calculates your chart on your phone, to the arc-minute, in a few seconds.</p></article>
+          <article class="jr-step"><span class="n">02</span><h3 data-i18n-html="jr2t">Your sky, <em>drawn</em></h3><p data-i18n="jr2p">Every planet, house and aspect of the moment you arrived, in a chart you can tap and read, planet by planet.</p></article>
+          <article class="jr-step"><span class="n">03</span><h3 data-i18n-html="jr3t">Ten systems, <em>one person</em></h3><p data-i18n="jr3p">Astrology, numerology, your name, the Pythagoras square, BaZi, Feng Shui, tarot and more, each opening its own chapter about you.</p></article>
+          <article class="jr-step"><span class="n">04</span><h3 data-i18n-html="jr4t">Your day, <em>from your chart</em></h3><p data-i18n="jr4p">Every morning: the Moon, your energy, your colour, a small ritual and the best hours of the day, where you are.</p></article>
+          <article class="jr-step"><span class="n">05</span><h3 data-i18n-html="jr5t">Ask <em>the cards</em></h3><p data-i18n="jr5p">A question, a card, a yes or a no. Eleven spreads for love, money, work and the choices in between.</p></article>
+          <article class="jr-step"><span class="n">06</span><h3 data-i18n-html="jr6t">Everything, <em>in one conclusion</em></h3><p data-i18n="jr6p">Who you are, your gifts, your challenges and your path, written as one portrait. Your code in three words.</p></article>
+          <div class="jr-rail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="jr-phone" aria-hidden="true">
+          <div class="jr-island"></div>
+          <div class="jr-screen">
+            <div class="scr scr-birth">
+              <div class="e" data-i18n="jrS1e">Your birth details</div>
+              <div class="t" style="margin-top:8px" data-i18n="jrS1t">Begin with you</div>
+              <div class="fld" data-v="Karina"><small data-i18n="jrName">Name</small><span></span></div>
+              <div class="fld" data-v="05 . 07 . 1999"><small data-i18n="jrDate">Date</small><span></span></div>
+              <div class="fld" data-v="18:45"><small data-i18n="jrTime">Time</small><span></span></div>
+              <div class="fld" data-v="Pushkin, Russia"><small data-i18n="jrPlace">Place</small><span></span></div>
+              <div class="goldbtn" data-i18n="jrReveal">Reveal my code</div>
+            </div>
+            <div class="scr">
+              <div class="e" data-i18n="jrS2e">Natal chart</div>
+              <div class="t" style="margin-top:8px" data-i18n="jrS2t">Your sky</div>
+              <div class="wheel" data-jr-art="natal"></div>
+              <div class="wheel-legend"><div><b>☉ ♋︎</b><span data-i18n="jrSun">Sun</span></div><div><b>☽ ♈︎</b><span data-i18n="jrMoon">Moon</span></div><div><b>↑ ♏︎</b><span data-i18n="jrAsc">Rising</span></div></div>
+            </div>
+            <div class="scr">
+              <div class="t" data-i18n="jrS3t">Your codes</div>
+              <div class="s" data-i18n="jrS3s">Everything your birth says about you.</div>
+              <div class="row3"><span class="num">01</span><span class="ic">✦</span><span class="nm" data-i18n="jrC1">The Secret of Your Name</span><span class="go">›</span></div>
+              <div class="row3"><span class="num">02</span><span class="ic">☾</span><span class="nm" data-i18n="jrC2">Astrology</span><span class="go">›</span></div>
+              <div class="row3"><span class="num">03</span><span class="ic">7</span><span class="nm" data-i18n="jrC3">Numerology</span><span class="go">›</span></div>
+              <div class="row3"><span class="num">04</span><span class="ic">⊞</span><span class="nm" data-i18n="jrC4">Pythagoras Square</span><span class="go">›</span></div>
+              <div class="row3"><span class="num">05</span><span class="ic">❁</span><span class="nm" data-i18n="jrC5">Life Cycles</span><span class="go">›</span></div>
+              <div class="row3"><span class="num">06</span><span class="ic">☯</span><span class="nm" data-i18n="jrC6">Eastern Systems</span><span class="go">›</span></div>
+              <div class="row3"><span class="num">07</span><span class="ic">✧</span><span class="nm" data-i18n="jrC7">Tarot</span><span class="go">›</span></div>
+            </div>
+            <div class="scr">
+              <div class="today-top"><div><div class="t" data-i18n-html="jrS4t">Good<br>evening</div><div class="e" style="margin-top:10px" data-i18n="jrS4e">Waxing gibbous · 91%</div></div><div class="mini-moon"></div></div>
+              <div class="glance"><div><b>☾</b><span data-i18n="jrMoon">Moon</span></div><div><b>♏︎</b><span data-i18n="jrEnergy">Energy</span></div><div><b>1</b><span data-i18n="jrDay">Day</span></div><div><b style="color:#7A1E30">●</b><span data-i18n="jrColour">Colour</span></div></div>
+              <div class="energy"><div class="e" data-i18n="jrS4k">Your energy</div><div class="big" data-i18n="jrScorpio">Scorpio</div><p data-i18n="jrS4p">Today your voice carries. Say less. Mean more.</p></div>
+            </div>
+            <div class="scr">
+              <div class="e" data-i18n="jrS5e">Ask the cards</div>
+              <div class="t" style="margin-top:8px" data-i18n="jrS5t">Should I say yes?</div>
+              <div class="card5"><div class="in"><div class="f"><div data-jr-art="tarot" style="width:80%;height:80%"></div></div><div class="b"></div></div></div>
+              <div class="answer"><span data-i18n="jrYes">Yes</span><small data-i18n="jrStar">The Star: hope that repairs itself.</small></div>
+            </div>
+            <div class="scr prof">
+              <div class="e" data-i18n="jrS6e">Profile</div>
+              <div class="name">Karina</div>
+              <div class="hl" data-i18n="jrS6h">A deep, intuitive nurturer</div>
+              <div class="keys"><div>☉ <span data-i18n="jrK1">Tenderness · intuition</span></div><div>☽ <span data-i18n="jrK2">Courage · speed</span></div><div>↑ <span data-i18n="jrK3">Depth · magnetism</span></div></div>
+              <div class="words3"><small data-i18n="jrS6w">Your code in three words</small><span data-i18n="jrWords">Roots · Weight · Balance</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="try" class="try">
@@ -484,43 +558,6 @@
         <div class="reveal"><div class="n" data-count="400">0</div><div class="l" data-i18n="n3">names researched</div></div>
         <div class="reveal"><div class="n" data-count="2">0</div><div class="l" data-i18n="n4">languages</div></div>
       </div>
-    </div>
-  </section>
-
-  <section id="art" class="map">
-    <div class="wrap">
-      <div class="eyebrow reveal" data-i18n="artEyebrow">Know yourself</div>
-      <h2 class="reveal" data-i18n-html="artTitle">Your birth code is a map.<br><em>This life is the journey.</em></h2>
-      <p class="lede reveal" data-i18n="artLede">Birth Code is not a horoscope. It is a way to know yourself: to read the map you were born with, to understand why you feel what you feel, and to walk your own way through this life with more clarity.</p>
-
-      <div class="journey">
-        <svg class="path" viewBox="0 0 1000 200" preserveAspectRatio="none" aria-hidden="true">
-          <path id="journeyPath" d="M 20 120 C 140 20, 240 20, 300 100 S 460 190, 520 100 S 700 10, 760 90 S 900 180, 980 80" />
-        </svg>
-        <div class="stations">
-          <figure class="station">
-            <div class="flip"><div class="face back"></div><div class="face front drawnface" data-art="ascendant"></div><div class="glare"></div></div>
-            <figcaption><span class="stepno">I</span><b data-i18n="st1t">Who you are</b><span data-i18n="st1p">Your Ascendant: how you arrive, the self the world meets first.</span></figcaption>
-          </figure>
-          <figure class="station">
-            <div class="flip"><div class="face back"></div><div class="face front drawnface" data-art="today"></div><div class="glare"></div></div>
-            <figcaption><span class="stepno">II</span><b data-i18n="st2t">What you feel</b><span data-i18n="st2p">Your Moon: what you need to feel safe when nobody is watching.</span></figcaption>
-          </figure>
-          <figure class="station">
-            <div class="flip"><div class="face back"></div><div class="face front drawnface" data-art="bazi"></div><div class="glare"></div></div>
-            <figcaption><span class="stepno">III</span><b data-i18n="st3t">Your nature</b><span data-i18n="st3p">Your Day Master: the element you were born with, in the language of BaZi.</span></figcaption>
-          </figure>
-          <figure class="station">
-            <div class="flip"><div class="face back"></div><div class="face front drawnface" data-art="chinese"></div><div class="glare"></div></div>
-            <figcaption><span class="stepno">IV</span><b data-i18n="st4t">Your sign in the East</b><span data-i18n="st4p">Your Chinese animal and element, from the real New Year of your birth.</span></figcaption>
-          </figure>
-          <figure class="station">
-            <div class="flip"><div class="face back"></div><div class="face front drawnface" data-art="matrix"></div><div class="glare"></div></div>
-            <figcaption><span class="stepno">V</span><b data-i18n="st5t">Your path</b><span data-i18n="st5p">Your Destiny Matrix and tarot: the direction that asks you to grow.</span></figcaption>
-          </figure>
-        </div>
-      </div>
-      <p class="journey-close reveal" data-i18n-html="artClose">Every system adds one layer. <em>Together they become your map.</em></p>
     </div>
   </section>
 
@@ -614,6 +651,7 @@
 <script src="snippets.js"></script>
 <script src="art.js"></script>
 <script src="yesno.js"></script>
+<script src="journey.js"></script>
 <script>
 /* ---------- the sky: stars, a spiral galaxy, planets on their orbits, the odd shooting star ---------- */
 (() => {
@@ -1248,6 +1286,20 @@ window.BC = (() => {
 /* ---------- English and Russian ---------- */
 (() => {
   const RU = {
+    navJourney: 'Путь', jrEyebrow: 'Твой путь', jrTitle: 'От одного мгновения<br><em>к целой жизни.</em>',
+    jrLede: 'Шесть шагов: от минуты твоего рождения до портрета того, кто ты есть. Листай вниз и пройди Birth Code так, как пройдёшь его в телефоне.',
+    jr1t: 'Момент твоего <em>рождения</em>', jr1p: 'Дата, время и место. Birth Code считает твою карту прямо в телефоне, с точностью до угловой минуты, за несколько секунд.',
+    jr2t: 'Твоё небо, <em>нарисованное</em>', jr2p: 'Каждая планета, дом и аспект того момента, когда ты пришла, в карте, которую можно открыть и прочитать планету за планетой.',
+    jr3t: 'Десять систем, <em>один человек</em>', jr3p: 'Астрология, нумерология, твоё имя, квадрат Пифагора, Ба Цзы, фэншуй, таро и не только: у каждой своя глава о тебе.',
+    jr4t: 'Твой день <em>по твоей карте</em>', jr4p: 'Каждое утро: Луна, твоя энергия, твой цвет, маленький ритуал и лучшие часы дня там, где ты сейчас.',
+    jr5t: 'Спроси <em>карты</em>', jr5p: 'Вопрос, карта, да или нет. Одиннадцать раскладов для любви, денег, работы и выбора между ними.',
+    jr6t: 'Всё <em>в одном итоге</em>', jr6p: 'Кто ты, твои дары, твои вызовы и твой путь, собранные в один портрет. Твой код в трёх словах.',
+    jrS1e: 'Данные рождения', jrS1t: 'Начни с себя', jrName: 'Имя', jrDate: 'Дата', jrTime: 'Время', jrPlace: 'Место', jrReveal: 'Открыть мой код',
+    jrS2e: 'Натальная карта', jrS2t: 'Твоё небо', jrSun: 'Солнце', jrMoon: 'Луна', jrAsc: 'Асцендент',
+    jrS3t: 'Твои коды', jrS3s: 'Всё, что говорит о тебе твоё рождение.', jrC1: 'Тайна твоего имени', jrC2: 'Астрология', jrC3: 'Нумерология', jrC4: 'Квадрат Пифагора', jrC5: 'Циклы жизни', jrC6: 'Восточные системы', jrC7: 'Таро',
+    jrS4t: 'Добрый<br>вечер', jrS4e: 'Растущая Луна · 91%', jrEnergy: 'Энергия', jrDay: 'День', jrColour: 'Цвет', jrS4k: 'Твоя энергия', jrScorpio: 'Скорпион', jrS4p: 'Сегодня твой голос слышен. Говори меньше. Имей в виду больше.',
+    jrS5e: 'Спроси карты', jrS5t: 'Сказать да?', jrYes: 'Да', jrStar: 'Звезда: надежда, которая восстанавливает себя.',
+    jrS6e: 'Профиль', jrS6h: 'Глубокая, интуитивная хранительница', jrK1: 'Нежность · интуиция', jrK2: 'Смелость · скорость', jrK3: 'Глубина · магнетизм', jrS6w: 'Твой код в трёх словах', jrWords: 'Корни · Вес · Равновесие',
     navSystems: 'Системы', navArt: 'Твоя карта', navHow: 'Как это работает',
     eyebrow: 'Твой личный код',
     tagline: 'Записан в небе в момент твоего рождения. Прочитай его наконец, в одном красивом месте.',
