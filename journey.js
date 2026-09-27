@@ -53,7 +53,7 @@
   // drawings inside the phone come from art.js, like everywhere else on the page
   document.querySelectorAll('[data-jr-art]').forEach((el) => { el.innerHTML = window.ART(el.dataset.jrArt); });
 
-  // step 1 types her birth details into the fields, letter by letter
+  // step 1 types an example's birth details into the fields, letter by letter (a made-up person, not a real one)
   let typing = 0;
   const typeFields = () => {
     const my = ++typing;
@@ -65,7 +65,7 @@
     const next = () => {
       if (my !== typing) return;
       if (i >= fields.length) { btn.classList.add('ready'); return; }
-      const f = fields[i], text = f.dataset.v, span = f.querySelector('span');
+      const f = fields[i], text = (document.documentElement.lang === 'ru' && f.dataset.vRu) || f.dataset.v, span = f.querySelector('span');
       f.classList.add('typing');
       let k = 0;
       const tick = () => {

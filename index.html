@@ -3,12 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Birth Code</title>
-<meta name="description" content="Your personal code, written the moment you were born. Astrology, numerology, the secret of your name, BaZi, tarot and more, in one beautiful app.">
+<title>Birth Code: Astrology, Numerology & Tarot for iPhone</title>
+<meta name="description" content="Your natal chart, numerology, the Pythagoras square, BaZi, the Destiny Matrix and 78 painted tarot cards, calculated on your iPhone. A daily guide to your energy and your style, in English and Russian.">
 <meta name="theme-color" content="#0B1024">
-<meta property="og:title" content="Birth Code">
-<meta property="og:description" content="Your personal code, written the moment you were born.">
-<meta property="og:image" content="img/icon.png">
+<link rel="canonical" href="https://getbirthcode.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Birth Code">
+<meta property="og:url" content="https://getbirthcode.app/">
+<meta property="og:title" content="Birth Code: Astrology, Numerology & Tarot">
+<meta property="og:description" content="Your chart, your numbers and 78 painted tarot cards, calculated on your phone. A daily guide to your energy and your style.">
+<meta property="og:image" content="https://getbirthcode.app/img/icon.png">
+<meta property="og:image:alt" content="The Birth Code app icon">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Birth Code: Astrology, Numerology & Tarot">
+<meta name="twitter:description" content="Your chart, your numbers and 78 painted tarot cards, calculated on your phone.">
+<meta name="twitter:image" content="https://getbirthcode.app/img/icon.png">
+<!-- On release day, add the Smart App Banner with the real id: <meta name="apple-itunes-app" content="app-id=0000000000"> -->
 <link rel="icon" href="img/icon.png">
 <link rel="apple-touch-icon" href="img/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -65,6 +75,9 @@
   header.solid { background: rgba(11, 16, 36, 0.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-color: var(--line); }
   .brand { display: flex; align-items: center; gap: 12px; font-family: var(--display); font-size: 24px; letter-spacing: 0.02em; }
   .brand img { width: 34px; height: 34px; border-radius: 9px; }
+  /* The name set like the app icon (Karina, 27 Sep 2026): thin serif capitals, widely spaced. */
+  .brand span { font-size: 19px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.3em; color: #F3EBDD; padding-top: 2px; white-space: nowrap; }
+  @media (max-width: 640px) { .brand span { font-size: 15px; letter-spacing: 0.22em; } } @media (max-width: 360px) { .brand { gap: 8px; } .brand img { width: 28px; height: 28px; } .brand span { font-size: 12.5px; letter-spacing: 0.16em; } }
   .nav { display: flex; align-items: center; gap: 22px; font-size: 14px; }
   .nav a.link { color: var(--ivory-soft); transition: color .2s; }
   .nav a.link:hover { color: var(--gold-light); }
@@ -193,7 +206,9 @@
   .day { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 56px; }
   .dayitem { padding: 26px 24px; border-radius: 20px; border: 1px solid var(--line); background: rgba(255, 255, 255, 0.025); transition: border-color .3s ease, transform .3s ease; }
   .dayitem:hover { border-color: rgba(216, 182, 124, 0.5); transform: translateY(-3px); }
-  .dayglyph { font-size: 26px; color: var(--gold); }
+  .dayitem { overflow: hidden; }
+  .dayimg { height: 170px; margin: -26px -24px 18px; background: #090F22 center / cover no-repeat; border-bottom: 1px solid var(--line); transition: transform .6s ease; }
+  .dayitem:hover .dayimg { transform: scale(1.04); }
   .dayitem b { display: block; font-family: var(--display); font-weight: 600; font-size: 24px; margin-top: 10px; }
   .dayitem span { display: block; font-size: 14.5px; color: var(--ivory-soft); margin-top: 6px; }
   @media (max-width: 900px) { .day { grid-template-columns: 1fr; } }
@@ -245,14 +260,14 @@
   .station.turned .flip { transform: rotateY(0deg) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); }
   .station.turned.hover .flip { transition: transform .15s ease-out; }
   .face { position: absolute; inset: 0; border-radius: inherit; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: #0B1430 center / cover no-repeat; }
-  .face.back { transform: rotateY(180deg);
+  .face.back { transform: rotateY(180deg); background: #0B1430 url(img/tarot/back.jpg) center / cover no-repeat !important;
     background: radial-gradient(circle at 50% 50%, rgba(216, 182, 124, 0.18), transparent 55%),
       radial-gradient(1px 1px at 20% 30%, #F0DBAE, transparent), radial-gradient(1px 1px at 70% 20%, #F0DBAE, transparent),
       radial-gradient(1px 1px at 40% 75%, #F0DBAE, transparent), radial-gradient(1px 1px at 85% 65%, #F0DBAE, transparent),
       radial-gradient(1px 1px at 15% 85%, #F0DBAE, transparent), radial-gradient(1px 1px at 60% 50%, #F0DBAE, transparent),
       linear-gradient(160deg, #141d42, #0a1128);
     box-shadow: inset 0 0 0 6px #0c1330, inset 0 0 0 7px rgba(216, 182, 124, 0.55), inset 0 0 0 12px #0c1330, inset 0 0 0 13px rgba(216, 182, 124, 0.3); }
-  .face.back::after { content: '☾ ✦ ☽'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  .face.back::after { content: none; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
     font-family: var(--display); font-size: 30px; letter-spacing: 0.3em; color: var(--gold); text-shadow: 0 0 12px rgba(216, 182, 124, 0.7); }
   .face.front.drawnface .art { filter: none; }
   .face.front.drawnface { padding: 18%; background: radial-gradient(circle at 50% 42%, rgba(216, 182, 124, 0.2), transparent 60%), linear-gradient(160deg, #141d42, #0a1128);
@@ -307,12 +322,52 @@
   .soon { margin-top: 18px; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ivory-faint); }
 
   footer {
-    border-top: 1px solid var(--line); padding: 36px clamp(20px, 6vw, 72px) 44px;
-    display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--line); padding: 36px clamp(16px, 6vw, 72px) 44px;
     font-size: 13px; color: var(--ivory-faint); background: rgba(11, 16, 36, 0.6);
   }
-  footer nav { display: flex; gap: 22px; }
+  footer .foot-row { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: space-between; }
+  footer nav { display: flex; flex-wrap: wrap; gap: 8px 22px; }
   footer a:hover { color: var(--gold-light); }
+  footer .imprint { margin-top: 14px; line-height: 1.6; }
+  [hidden] { display: none !important; }
+
+  /* inside the app: the four tabs */
+  .inside .grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .edition { margin-top: 34px; font-family: var(--display); font-style: italic; font-size: clamp(20px, 2.4vw, 26px); color: var(--ivory-soft); }
+
+  /* prices */
+  .prices { text-align: center; }
+  .freebar { display: flex; align-items: center; gap: 28px; margin: 52px auto 0; max-width: 980px; padding: 20px 28px; border-radius: 20px; border: 1px solid var(--line); background: rgba(255, 255, 255, 0.025); text-align: left; }
+  .freebar-k span { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); }
+  .freebar-k b { display: block; font-family: var(--display); font-weight: 500; font-size: 24px; white-space: nowrap; margin-top: 2px; }
+  .freebar ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; padding-left: 26px; border-left: 1px solid var(--line); }
+  .freebar li, .incl li { position: relative; padding-left: 16px; font-size: 14.5px; line-height: 1.5; color: var(--ivory-soft); }
+  .freebar li::before, .incl li::before { content: '✦'; position: absolute; left: 0; top: 2px; font-size: 9px; color: var(--gold); }
+  .tiers { display: grid; grid-template-columns: 1fr 1fr 1.12fr; gap: 18px; max-width: 980px; margin: 22px auto 0; align-items: stretch; }
+  .tier { position: relative; display: flex; flex-direction: column; padding: 34px 28px 28px; border-radius: 26px; border: 1px solid var(--line); background: linear-gradient(170deg, rgba(31, 41, 80, 0.55), rgba(12, 18, 40, 0.55)); text-align: left; transition: transform .35s ease, border-color .35s ease; }
+  .tier:hover { transform: translateY(-4px); border-color: rgba(216, 182, 124, 0.45); }
+  .tier-k { font-size: 11px; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; color: var(--ivory-soft); }
+  .tier-p { margin-top: 18px; }
+  .tier-p b { display: block; font-family: var(--display); font-weight: 500; font-size: 56px; line-height: 0.95; color: var(--gold-light); letter-spacing: -0.01em; }
+  .tier-p span { display: block; margin-top: 8px; font-size: 13.5px; color: var(--ivory-faint); }
+  .tier p { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line); font-family: var(--display); font-style: italic; font-size: 19px; line-height: 1.4; color: var(--ivory); flex: 1; }
+  .tier-s { margin-top: 22px; font-size: 12.5px; letter-spacing: 0.04em; color: var(--ivory-faint); }
+  .tier-s.gold { color: var(--gold); }
+  .tier.life { overflow: hidden; border-color: rgba(216, 182, 124, 0.7); background: radial-gradient(120% 80% at 100% 0%, rgba(216, 182, 124, 0.20), transparent 60%), linear-gradient(170deg, rgba(40, 46, 84, 0.9), rgba(14, 20, 44, 0.9)); box-shadow: 0 0 0 1px rgba(216, 182, 124, 0.25) inset, 0 30px 80px rgba(0, 0, 0, 0.45), 0 0 60px rgba(216, 182, 124, 0.12); }
+  .tier.life::after { content: ''; position: absolute; top: -40px; right: -46px; width: 190px; height: 190px; background: url(img/day/moon-cut.webp) center / contain no-repeat; opacity: 0.32; pointer-events: none; }
+  .tier.life > * { position: relative; z-index: 1; }
+  .tier.life .tier-k { color: var(--gold); }
+  .tier-badge { position: absolute !important; top: 18px; right: 18px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #0F1630; background: linear-gradient(135deg, #F1D9A6, #C9A227); border-radius: 999px; padding: 6px 12px; box-shadow: 0 6px 18px rgba(201, 162, 39, 0.35); }
+  .incl { max-width: 980px; margin: 26px auto 0; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px 26px; }
+  .incl li { text-align: left; }
+  .incl-k { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
+  .incl ul { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; }
+  .prices .fine { font-size: 13px; color: var(--ivory-faint); margin: 26px auto 0; max-width: 620px; }
+  @media (max-width: 860px) { .tiers { grid-template-columns: 1fr; max-width: 460px; } .tier.life { order: -1; } .freebar { flex-direction: column; align-items: flex-start; gap: 12px; max-width: 460px; } .freebar ul { padding-left: 0; border-left: 0; flex-direction: column; } .incl { flex-direction: column; } .incl ul { flex-direction: column; align-items: flex-start; } }
+
+  /* the release state: a quiet label, not a button, until the App Store link exists */
+  .soonpill { display: inline-flex; align-items: center; padding: 14px 26px; border-radius: 999px; border: 1px solid var(--line);
+    font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-light); background: rgba(216, 182, 124, 0.06); cursor: default; }
 
   /* the zodiac ring behind the title */
   .ring { position: absolute; left: 50%; top: 50%; width: min(92vw, 820px); aspect-ratio: 1; transform: translate(-50%, -52%); pointer-events: none; opacity: 0.55; }
@@ -364,6 +419,7 @@
   @media (max-width: 980px) { .results { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 640px) { .results { grid-template-columns: 1fr; } .try form { flex-direction: column; align-items: stretch; } .field input, .seg { width: 100%; } .seg button { flex: 1; } }
   .try .fine { font-size: 13px; color: var(--ivory-faint); margin-top: 22px; }
+  .r p .cusp { display: block; margin-top: 8px; font-style: normal; font-size: 13px; color: var(--ivory-faint); }
 
   /* questions */
   .faq { max-width: 820px; margin: 50px auto 0; }
@@ -407,6 +463,7 @@
     <a class="link" href="#ask" data-i18n="navAsk">Ask the cards</a>
     <a class="link" href="#systems" data-i18n="navSystems">Systems</a>
     <a class="link" href="#journey" data-i18n="navJourney">Journey</a>
+    <a class="link" href="#prices" data-i18n="navPrices">Prices</a>
     <div class="lang" role="group" aria-label="Language">
       <button type="button" data-lang="en" class="on">EN</button>
       <button type="button" data-lang="ru">RU</button>
@@ -422,8 +479,9 @@
     <h1>Birth Code</h1>
     <p class="tagline" data-i18n="tagline">Written in the sky the moment you were born. Read it at last, in one beautiful place.</p>
     <div class="cta">
-      <a class="btn gold" href="#final" data-i18n="ctaMain">Get Birth Code</a>
-      <a class="btn ghost" href="#systems" data-i18n="ctaSecond">Explore what's inside</a>
+      <a class="btn gold" href="#try" data-soon data-i18n="ctaTry">Try it now</a>
+      <a class="btn gold" href="#final" data-store hidden data-i18n="ctaMain">Get Birth Code</a>
+      <a class="btn ghost" href="#inside" data-i18n="ctaSecond">Explore what's inside</a>
     </div>
     <div class="scroll-hint" data-i18n="scroll">Scroll</div>
   </section>
@@ -432,7 +490,7 @@
     <div class="jr-intro">
       <div class="eyebrow reveal" data-i18n="jrEyebrow">Your journey</div>
       <h2 class="reveal" data-i18n-html="jrTitle">From one moment<br><em>to a whole life.</em></h2>
-      <p class="lede reveal" data-i18n="jrLede">Six steps, from the minute you were born to a portrait of who you are. Scroll, and walk through Birth Code the way you will on your phone.</p>
+      <p class="lede reveal" data-i18n="jrLede">Six steps, from the minute you were born to a style that is recognisably yours. Scroll, and walk through Birth Code the way you will on your phone.</p>
     </div>
     <div class="jr-track">
       <div class="jr-sticky">
@@ -442,9 +500,9 @@
           <article class="jr-step"><span class="n">01</span><h3 data-i18n-html="jr1t">Your birth <em>moment</em></h3><p data-i18n="jr1p">Date, time and place. Birth Code calculates your chart on your phone, to the arc-minute, in a few seconds.</p></article>
           <article class="jr-step"><span class="n">02</span><h3 data-i18n-html="jr2t">Your sky, <em>drawn</em></h3><p data-i18n="jr2p">Every planet, house and aspect of the moment you arrived, in a chart you can tap and read, planet by planet.</p></article>
           <article class="jr-step"><span class="n">03</span><h3 data-i18n-html="jr3t">Ten systems, <em>one person</em></h3><p data-i18n="jr3p">Astrology, numerology, your name, the Pythagoras square, BaZi, Feng Shui, tarot and more, each opening its own chapter about you.</p></article>
-          <article class="jr-step"><span class="n">04</span><h3 data-i18n-html="jr4t">Your day, <em>from your chart</em></h3><p data-i18n="jr4p">Every morning: the Moon, your energy, your colour, a small ritual and the best hours of the day, where you are.</p></article>
-          <article class="jr-step"><span class="n">05</span><h3 data-i18n-html="jr5t">Ask <em>the cards</em></h3><p data-i18n="jr5p">A question, a card, a yes or a no. Eleven spreads for love, money, work and the choices in between.</p></article>
-          <article class="jr-step"><span class="n">06</span><h3 data-i18n-html="jr6t">Everything, <em>in one conclusion</em></h3><p data-i18n="jr6p">Who you are, your gifts, your challenges and your path, written as one portrait. Your code in three words.</p></article>
+          <article class="jr-step"><span class="n">04</span><h3 data-i18n-html="jr4t">Your day, <em>from your chart</em></h3><p data-i18n="jr4p">Every morning: the Moon and its phase, the sky touching your chart, your personal day, your colour and a card of the day.</p></article>
+          <article class="jr-step"><span class="n">05</span><h3 data-i18n-html="jr5t">Ask <em>the cards</em></h3><p data-i18n="jr5p">In Readings: a question, a card, a yes or a no. Eleven spreads for love, money and work, and all 78 cards, each one painted.</p></article>
+          <article class="jr-step"><span class="n">06</span><h3 data-i18n-html="jr6t">Your style, <em>from your chart</em></h3><p data-i18n="jr6p">Eighteen blocks, each with three concrete steps. Your energy mix, your Style Formula and palette, mood boards and who fits you.</p></article>
           <div class="jr-rail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
         </div>
         <div class="jr-phone" aria-hidden="true">
@@ -453,17 +511,17 @@
             <div class="scr scr-birth">
               <div class="e" data-i18n="jrS1e">Your birth details</div>
               <div class="t" style="margin-top:8px" data-i18n="jrS1t">Begin with you</div>
-              <div class="fld" data-v="Karina"><small data-i18n="jrName">Name</small><span></span></div>
-              <div class="fld" data-v="05 . 07 . 1999"><small data-i18n="jrDate">Date</small><span></span></div>
-              <div class="fld" data-v="18:45"><small data-i18n="jrTime">Time</small><span></span></div>
-              <div class="fld" data-v="Pushkin, Russia"><small data-i18n="jrPlace">Place</small><span></span></div>
+              <div class="fld" data-v="Anna" data-v-ru="Анна"><small data-i18n="jrName">Name</small><span></span></div>
+              <div class="fld" data-v="12 . 04 . 1994"><small data-i18n="jrDate">Date</small><span></span></div>
+              <div class="fld" data-v="08:30"><small data-i18n="jrTime">Time</small><span></span></div>
+              <div class="fld" data-v="Vienna, Austria" data-v-ru="Вена, Австрия"><small data-i18n="jrPlace">Place</small><span></span></div>
               <div class="goldbtn" data-i18n="jrReveal">Reveal my code</div>
             </div>
             <div class="scr">
               <div class="e" data-i18n="jrS2e">Natal chart</div>
               <div class="t" style="margin-top:8px" data-i18n="jrS2t">Your sky</div>
               <div class="wheel" data-jr-art="natal"></div>
-              <div class="wheel-legend"><div><b>☉ ♋︎</b><span data-i18n="jrSun">Sun</span></div><div><b>☽ ♈︎</b><span data-i18n="jrMoon">Moon</span></div><div><b>↑ ♏︎</b><span data-i18n="jrAsc">Rising</span></div></div>
+              <div class="wheel-legend"><div><b>☉ ♈︎</b><span data-i18n="jrSun">Sun</span></div><div><b>☽ ♉︎</b><span data-i18n="jrMoon">Moon</span></div><div><b>↑ ♊︎</b><span data-i18n="jrAsc">Rising</span></div></div>
             </div>
             <div class="scr">
               <div class="t" data-i18n="jrS3t">Your codes</div>
@@ -473,26 +531,30 @@
               <div class="row3"><span class="num">03</span><span class="ic">7</span><span class="nm" data-i18n="jrC3">Numerology</span><span class="go">›</span></div>
               <div class="row3"><span class="num">04</span><span class="ic">⊞</span><span class="nm" data-i18n="jrC4">Pythagoras Square</span><span class="go">›</span></div>
               <div class="row3"><span class="num">05</span><span class="ic">❁</span><span class="nm" data-i18n="jrC5">Life Cycles</span><span class="go">›</span></div>
-              <div class="row3"><span class="num">06</span><span class="ic">☯</span><span class="nm" data-i18n="jrC6">Eastern Systems</span><span class="go">›</span></div>
+              <div class="row3"><span class="num">06</span><span class="ic">☯&#xFE0E;</span><span class="nm" data-i18n="jrC6">Eastern Systems</span><span class="go">›</span></div>
               <div class="row3"><span class="num">07</span><span class="ic">✧</span><span class="nm" data-i18n="jrC7">Tarot</span><span class="go">›</span></div>
+              <div class="row3"><span class="num">08</span><span class="ic">✶</span><span class="nm" data-i18n="jrC8">Angel Numbers</span><span class="go">›</span></div>
             </div>
             <div class="scr">
               <div class="today-top"><div><div class="t" data-i18n-html="jrS4t">Good<br>evening</div><div class="e" style="margin-top:10px" data-i18n="jrS4e">Waxing gibbous · 91%</div></div><div class="mini-moon"></div></div>
-              <div class="glance"><div><b>☾</b><span data-i18n="jrMoon">Moon</span></div><div><b>♏︎</b><span data-i18n="jrEnergy">Energy</span></div><div><b>1</b><span data-i18n="jrDay">Day</span></div><div><b style="color:#7A1E30">●</b><span data-i18n="jrColour">Colour</span></div></div>
-              <div class="energy"><div class="e" data-i18n="jrS4k">Your energy</div><div class="big" data-i18n="jrScorpio">Scorpio</div><p data-i18n="jrS4p">Today your voice carries. Say less. Mean more.</p></div>
+              <div class="glance"><div><b>☾</b><span data-i18n="jrMoon">Moon</span></div><div><b>♉︎</b><span data-i18n="jrEnergy">Energy</span></div><div><b>1</b><span data-i18n="jrDay">Day</span></div><div><b style="color:#7A1E30">●</b><span data-i18n="jrColour">Colour</span></div></div>
+              <div class="energy"><div class="e" data-i18n="jrS4k">Your energy</div><div class="big" data-i18n="jrTaurus">Taurus</div><p data-i18n="jrS4p">A slow, grounded day. Say less, and let every word weigh more.</p></div>
             </div>
             <div class="scr">
               <div class="e" data-i18n="jrS5e">Ask the cards</div>
               <div class="t" style="margin-top:8px" data-i18n="jrS5t">Should I say yes?</div>
-              <div class="card5"><div class="in"><div class="f"><div data-jr-art="tarot" style="width:80%;height:80%"></div></div><div class="b"></div></div></div>
+              <div class="card5"><div class="in"><div class="f painted"></div><div class="b"></div></div></div>
               <div class="answer"><span data-i18n="jrYes">Yes</span><small data-i18n="jrStar">The Star: hope that repairs itself.</small></div>
             </div>
             <div class="scr prof">
               <div class="e" data-i18n="jrS6e">Profile</div>
-              <div class="name">Karina</div>
-              <div class="hl" data-i18n="jrS6h">A deep, intuitive nurturer</div>
-              <div class="keys"><div>☉ <span data-i18n="jrK1">Tenderness · intuition</span></div><div>☽ <span data-i18n="jrK2">Courage · speed</span></div><div>↑ <span data-i18n="jrK3">Depth · magnetism</span></div></div>
-              <div class="words3"><small data-i18n="jrS6w">Your code in three words</small><span data-i18n="jrWords">Roots · Weight · Balance</span></div>
+              <div class="name" data-i18n="jrAnna">Anna</div>
+              <div class="mix"><small data-i18n="jrS6m">Your mix</small>
+                <div class="mixrow"><b>♈︎</b><span data-i18n="jrAriesE">Aries energy</span><i>38%</i><u style="--w:38%"></u></div>
+                <div class="mixrow"><b>♊︎</b><span data-i18n="jrGeminiE">Gemini energy</span><i>27%</i><u style="--w:27%"></u></div>
+                <div class="mixrow"><b>♉︎</b><span data-i18n="jrTaurusE">Taurus energy</span><i>21%</i><u style="--w:21%"></u></div>
+              </div>
+              <div class="keys"><div>✦ <span data-i18n="jrK1">18 blocks</span></div><div>◈ <span data-i18n="jrK2">Style Formula</span></div><div>♡&#xFE0E; <span data-i18n="jrK3">Who fits you</span></div></div>
             </div>
           </div>
         </div>
@@ -504,11 +566,11 @@
     <div class="wrap">
       <div class="eyebrow reveal" data-i18n="tryEyebrow">Try it now</div>
       <h2 class="reveal" data-i18n-html="tryTitle">Try every system.<br><em>One sentence each.</em></h2>
-      <p class="lede reveal" style="margin-left:auto;margin-right:auto" data-i18n="tryLede">Enter your date of birth, and your name if you like. Every system in Birth Code answers in a sentence or two, calculated exactly as in the app. The full reading waits inside.</p>
+      <p class="lede reveal" style="margin-left:auto;margin-right:auto" data-i18n="tryLede">Enter your date of birth, and your name if you like. Every system in Birth Code answers in a sentence or two, calculated by the same rules as the app. The full reading waits inside.</p>
       <form id="tryForm" class="reveal">
         <label class="field"><span data-i18n="fDate">Date of birth</span><input id="tryDate" type="date" min="1930-01-01" max="2030-12-31" required></label>
-        <label class="field"><span data-i18n="fName">First name, optional</span><input id="tryName" type="text" maxlength="40" autocomplete="given-name" data-i18n-ph="fNamePh" placeholder="Karina"></label>
-        <div class="field"><span data-i18n="fSex">For Feng Shui</span>
+        <label class="field"><span data-i18n="fName">First name, optional</span><input id="tryName" type="text" maxlength="40" autocomplete="given-name" data-i18n-ph="fNamePh" placeholder="Anna"></label>
+        <div class="field"><span data-i18n="fSex">Woman or man</span>
           <div class="seg" role="radiogroup"><button type="button" class="on" data-sex="woman" data-i18n="fWoman">Woman</button><button type="button" data-sex="man" data-i18n="fMan">Man</button></div>
         </div>
         <button class="btn gold" type="submit" data-i18n="tryBtn">Reveal my code</button>
@@ -535,6 +597,21 @@
     </div>
   </section>
 
+  <section id="inside" class="inside">
+    <div class="wrap">
+      <div class="eyebrow reveal" data-i18n="inEyebrow">Inside the app</div>
+      <h2 class="reveal" data-i18n-html="inTitle">Four tabs.<br><em>Everything in its place.</em></h2>
+      <p class="lede reveal" data-i18n="inLede">Birth Code is arranged the way you will use it: a page for today, your codes, your readings, and your profile with your style.</p>
+      <div class="grid">
+        <div class="card reveal"><div class="glyph">☼</div><h3 data-i18n="in1t">Today</h3><p data-i18n="in1p">Every morning, the day read from your chart: the Moon, the sky on your planets, your personal numbers, your colour and a card of the day.</p></div>
+        <div class="card reveal"><div class="glyph">⊞</div><h3 data-i18n="in2t">Codes</h3><p data-i18n="in2p">Ten systems, each with its own chapter: your name, your natal chart, numerology, the Pythagoras square, life cycles, BaZi, the Chinese zodiac, Feng Shui, tarot with the Destiny Matrix, and angel numbers. And compatibility with the people you save, from synastry to the composite chart.</p></div>
+        <div class="card reveal"><div class="glyph">✧</div><h3 data-i18n="in3t">Readings</h3><p data-i18n="in3p">A card of the day and eleven illustrated spreads, among them love, money, career, a decision, yes or no, past-present-future, the month and the year. All 78 cards are painted.</p></div>
+        <div class="card reveal"><div class="glyph">◈</div><h3 data-i18n="in4t">Profile and style</h3><p data-i18n="in4p">Eighteen blocks read your own placements, each with a headline and three concrete steps. Your energy mix, a style guide for every energy, your Style Formula and palette, mood boards you arrange yourself, pages for work, love, perfume and your home, and who fits you.</p></div>
+      </div>
+      <p class="edition reveal" data-i18n="inEdition">A women's edition and a men's edition, each written in full. In English and in Russian.</p>
+    </div>
+  </section>
+
   <section id="systems">
     <div class="wrap">
       <div class="eyebrow reveal" data-i18n="sysEyebrow">Every system, one you</div>
@@ -555,7 +632,7 @@
       <div class="numbers">
         <div class="reveal"><div class="n" data-count="10">0</div><div class="l" data-i18n="n1">traditions</div></div>
         <div class="reveal"><div class="n" data-count="78">0</div><div class="l" data-i18n="n2">painted tarot cards</div></div>
-        <div class="reveal"><div class="n" data-count="400">0</div><div class="l" data-i18n="n3">names researched</div></div>
+        <div class="reveal"><div class="n" data-count="140" data-plus>0</div><div class="l" data-i18n="n3">names with a full profile</div></div>
         <div class="reveal"><div class="n" data-count="2">0</div><div class="l" data-i18n="n4">languages</div></div>
       </div>
     </div>
@@ -565,14 +642,14 @@
     <div class="wrap">
       <div class="eyebrow reveal" data-i18n="tdEyebrow">Every morning</div>
       <h2 class="reveal" data-i18n-html="tdTitle">Your day, read<br><em>from your own chart.</em></h2>
-      <p class="lede reveal" data-i18n="tdLede">Today is written for you, not for your sign. The sky of the day is laid over your birth chart, your personal numbers and your cards.</p>
+      <p class="lede reveal" data-i18n="tdLede">Today is written for you, not for your sign. The sky of the day is laid over your birth chart, your personal numbers and your cards, and it is free, every day.</p>
       <div class="day">
-        <div class="dayitem reveal"><div class="dayglyph">☽</div><b data-i18n="d1t">The Moon today</b><span data-i18n="d1p">Its phase, whether it grows or wanes, its sign and what it is good for: beauty, a new routine, study, rest.</span></div>
-        <div class="dayitem reveal"><div class="dayglyph">✦</div><b data-i18n="d2t">Your energy</b><span data-i18n="d2p">The theme of your day, your personal day number and what the planets touch in your own chart.</span></div>
-        <div class="dayitem reveal"><div class="dayglyph">◈</div><b data-i18n="d3t">Style today</b><span data-i18n="d3p">The colour of the day, gold or silver, the mood of your look, beauty and fragrance.</span></div>
-        <div class="dayitem reveal"><div class="dayglyph">✧</div><b data-i18n="d4t">Card of the day</b><span data-i18n="d4p">One card, face down until you turn it, with what it asks of you today.</span></div>
-        <div class="dayitem reveal"><div class="dayglyph">☼</div><b data-i18n="d5t">Your horoscope</b><span data-i18n="d5p">Love, work, money and energy, from the real transits to your natal planets.</span></div>
-        <div class="dayitem reveal"><div class="dayglyph">⚘</div><b data-i18n="d6t">Guidance</b><span data-i18n="d6p">What the day is good for, what to avoid, your best hours, your lucky number and symbol.</span></div>
+        <div class="dayitem reveal"><div class="dayimg" style="background-image:url(img/day/moon.jpg)"></div><b data-i18n="d1t">The Moon today</b><span data-i18n="d1p">Its phase, whether it grows or wanes, and the sign it moves through.</span></div>
+        <div class="dayitem reveal"><div class="dayimg" style="background-image:url(img/day/sky.jpg)"></div><b data-i18n="d2t">The sky on your chart</b><span data-i18n="d2p">Which of your own planets the sky is touching today, and what that can bring up.</span></div>
+        <div class="dayitem reveal"><div class="dayimg" style="background-image:url(img/day/numbers.jpg)"></div><b data-i18n="d3t">Your personal numbers</b><span data-i18n="d3p">Your personal year, month and day, and the theme each one sets.</span></div>
+        <div class="dayitem reveal"><div class="dayimg" style="background-image:url(img/day/express.jpg)"></div><b data-i18n="d4t">How to express yourself</b><span data-i18n="d4p">Through your Ascendant and your Venus: how to show up today, and what to bring forward.</span></div>
+        <div class="dayitem reveal"><div class="dayimg" style="background-image:url(img/day/colour.jpg)"></div><b data-i18n="d5t">Colour of the day</b><span data-i18n="d5p">One colour chosen for your day, to wear or simply to keep close.</span></div>
+        <div class="dayitem reveal"><div class="dayimg" style="background-image:url(img/day/card.jpg)"></div><b data-i18n="d6t">Card of the day</b><span data-i18n="d6p">One card, face down until you turn it, with what it asks of you today.</span></div>
       </div>
     </div>
   </section>
@@ -612,6 +689,51 @@
     </div>
   </section>
 
+  <section id="prices" class="prices">
+    <div class="wrap">
+      <div class="eyebrow reveal" data-i18n="prEyebrow">Prices</div>
+      <h2 class="reveal" data-i18n-html="prTitle">Begin for free.<br><em>Open everything when you wish.</em></h2>
+      <div class="freebar reveal">
+        <div class="freebar-k"><span data-i18n="prFreeK">Free</span><b data-i18n="prFreeT">Birth Code</b></div>
+        <ul>
+          <li data-i18n="prF1">Today, every day</li>
+          <li data-i18n="prF2">The card of the day</li>
+          <li data-i18n="prF3">The opening of every page, so you can see what it holds</li>
+        </ul>
+      </div>
+      <div class="tiers">
+        <div class="tier reveal">
+          <div class="tier-k" data-i18n="plM">Monthly</div>
+          <div class="tier-p"><b>14.99</b><span data-i18n="plMp">per month</span></div>
+          <p data-i18n="plMl">For one question that matters right now: a relationship, a move, a decision.</p>
+          <div class="tier-s" data-i18n="plMs">Cancel any time</div>
+        </div>
+        <div class="tier reveal">
+          <div class="tier-k" data-i18n="plY">Yearly</div>
+          <div class="tier-p"><b>99.99</b><span data-i18n="plYp">per year</span></div>
+          <p data-i18n="plYl">Follow every season of your sky: transits, personal months, the Moon and your cycles.</p>
+          <div class="tier-s gold" data-i18n="plYs">3 days free</div>
+        </div>
+        <div class="tier life reveal">
+          <div class="tier-badge" data-i18n="prBest">Best value</div>
+          <div class="tier-k" data-i18n="plL">Lifetime</div>
+          <div class="tier-p"><b>149.99</b><span data-i18n="plLp">once, for life</span></div>
+          <p data-i18n="plLl">Your whole personal map in your pocket, for good, everything in one place.</p>
+          <div class="tier-s gold" data-i18n="plLs">One payment</div>
+        </div>
+      </div>
+      <div class="incl reveal">
+        <div class="incl-k" data-i18n="plIncl">Every plan opens everything</div>
+        <ul>
+          <li data-i18n="prP1">Every code, reading and style page in full</li>
+          <li data-i18n="prP2">All 18 blocks, your Style Formula, palettes and mood boards</li>
+          <li data-i18n="prP3">Compatibility, every spread and all 78 cards</li>
+        </ul>
+      </div>
+      <p class="fine reveal" data-i18n="prFine">Prices are shown in your local currency in the App Store. Payment is handled by Apple; subscriptions renew automatically and can be cancelled at any time in your Apple ID settings.</p>
+    </div>
+  </section>
+
   <section id="faq">
     <div class="wrap">
       <div class="eyebrow reveal" style="text-align:center" data-i18n="faqEyebrow">Questions</div>
@@ -625,17 +747,19 @@
         <details class="reveal"><summary data-i18n="q6">Which languages is it in?</summary><p data-i18n="a6">English and Russian, fully written in both, and you can switch at the top of any page.</p></details>
         <details class="reveal"><summary data-i18n="q7">Can I read my partner or my friends too?</summary><p data-i18n="a7">Yes. Save the people who matter to you and read your compatibility, from simple element harmony to the real contacts between your two charts.</p></details>
         <details class="reveal"><summary data-i18n="q8">Why do different apps give different results?</summary><p data-i18n="a8">Because schools use different conventions: house systems, the day boundary in BaZi, how numbers are reduced. Birth Code chooses one convention for each system, names it, and uses it the same way for everyone.</p></details>
-        <details class="reveal"><summary data-i18n="q9">Is it only for women?</summary><p data-i18n="a9">Birth Code is written with women in mind, in tone and in its image and style guidance. Men can read their code too, in a shorter edition.</p></details>
+        <details class="reveal"><summary data-i18n="q9">Is it only for women?</summary><p data-i18n="a9">No. Birth Code has a women's edition and a men's edition, each written in full, with its own tone and its own style guidance. You choose yours with your birth details and can change it at any time.</p></details>
       </div>
     </div>
   </section>
 
   <section id="final" class="final">
     <div class="wrap">
-      <div class="eyebrow reveal" data-i18n="fEyebrow">Coming to the App Store</div>
+      <div class="eyebrow reveal" data-soon data-i18n="fEyebrow">Coming to the App Store</div>
+      <div class="eyebrow reveal" data-store hidden data-i18n="fEyebrowLive">On the App Store</div>
       <h2 class="reveal" data-i18n-html="fTitle">Your code has been waiting.<br><em>Come and read it.</em></h2>
       <div class="cta reveal">
-        <span class="btn gold" data-i18n="fCta">Coming soon to the App Store</span>
+        <span class="soonpill" data-soon data-i18n="fCta">Coming soon to the App Store</span>
+        <a class="btn gold" data-store hidden href="#" data-i18n="fStore">Download on the App Store</a>
       </div>
       <p class="soon reveal" data-i18n="fSoon">iPhone · English and Russian</p>
     </div>
@@ -643,8 +767,11 @@
 </main>
 
 <footer>
-  <div>© <span id="year"></span> Birth Code</div>
-  <div data-i18n="footNote">Made with care, under the stars.</div>
+  <div class="foot-row">
+    <div>© <span id="year"></span> Birth Code · <span data-i18n="footNote">Made with care, under the stars.</span></div>
+    <nav aria-label="Legal"><a href="privacy.html" data-i18n="footPrivacy">Privacy</a><a href="terms.html" data-i18n="footTerms">Terms</a><a href="support.html" data-i18n="footSupport">Support</a></nav>
+  </div>
+  <div class="imprint"><span data-i18n="footPublisher">Published by Loaded AG, Klostergutstrasse 4, 8252 Schlatt TG, Switzerland · UID CHE-413.943.367</span> · <a href="mailto:hello@loaded.ch">hello@loaded.ch</a></div>
 </footer>
 
 <script src="cny.js"></script>
@@ -883,6 +1010,16 @@
   window.addEventListener('resize', buildConstellations);
 })();
 
+/* ---------- the App Store link ----------
+   RELEASE DAY: paste the App Store address below (and add the apple-itunes-app meta tag in <head>). While it is empty,
+   the page honestly says "Coming soon" and shows no download button. */
+const APP_STORE_URL = ''; // e.g. 'https://apps.apple.com/app/birth-code/id0000000000'
+(() => {
+  if (!APP_STORE_URL) return;
+  document.querySelectorAll('[data-store]').forEach((el) => { el.hidden = false; if (el.tagName === 'A') { el.href = APP_STORE_URL; el.rel = 'noopener'; } });
+  document.querySelectorAll('[data-soon]').forEach((el) => { el.hidden = true; });
+})();
+
 /* ---------- header, reveals and the card spotlight ---------- */
 (() => {
   const header = document.getElementById('top');
@@ -928,11 +1065,11 @@
       if (!e.isIntersecting) continue;
       const el = e.target, target = Number(el.dataset.count);
       counters.unobserve(el);
-      if (reduce) { el.textContent = target; continue; }
+      if (reduce) { el.textContent = target + ('plus' in el.dataset ? '+' : ''); continue; }
       const t0 = performance.now(), dur = 1600;
       const step = (now) => {
         const k = Math.min(1, (now - t0) / dur), eased = 1 - Math.pow(1 - k, 3);
-        el.textContent = Math.round(target * eased) + (k === 1 && target >= 400 ? '+' : '');
+        el.textContent = Math.round(target * eased) + (k === 1 && 'plus' in el.dataset ? '+' : '');
         if (k < 1) requestAnimationFrame(step);
       };
       requestAnimationFrame(step);
@@ -993,12 +1130,26 @@
 
 /* ---------- try every system: the same rules the app uses ---------- */
 window.BC = (() => {
-  const SIGNS = [
-    ['capricorn', '♑︎', 1, 19], ['aquarius', '♒︎', 2, 18], ['pisces', '♓︎', 3, 20], ['aries', '♈︎', 4, 19],
-    ['taurus', '♉︎', 5, 20], ['gemini', '♊︎', 6, 20], ['cancer', '♋︎', 7, 22], ['leo', '♌︎', 8, 22],
-    ['virgo', '♍︎', 9, 22], ['libra', '♎︎', 10, 22], ['scorpio', '♏︎', 11, 21], ['sagittarius', '♐︎', 12, 21],
-  ];
-  const sunSign = (m, d) => { const i = SIGNS.findIndex(([, , month]) => month === m); return d <= SIGNS[i][3] ? SIGNS[i] : SIGNS[(i + 1) % 12]; };
+  const jdn = (y, m, d) => { const a = Math.floor((14 - m) / 12), yy = y + 4800 - a, mm = m + 12 * a - 3; return d + Math.floor((153 * mm + 2) / 5) + 365 * yy + Math.floor(yy / 4) - Math.floor(yy / 100) + Math.floor(yy / 400) - 32045; };
+  // Sun sign from the Sun's real position (Meeus, low precision: about 0.01°), not from fixed calendar dates.
+  // Without a birth time the day is open: anywhere on Earth, a birthday runs from 26 hours before to 24 hours after
+  // noon UTC (half an hour of margin added). If the Sun changes sign inside that window, the sign depends on the time and place of birth: a cusp.
+  const SIGNS = [['aries', '♈︎'], ['taurus', '♉︎'], ['gemini', '♊︎'], ['cancer', '♋︎'], ['leo', '♌︎'], ['virgo', '♍︎'],
+    ['libra', '♎︎'], ['scorpio', '♏︎'], ['sagittarius', '♐︎'], ['capricorn', '♑︎'], ['aquarius', '♒︎'], ['pisces', '♓︎']];
+  const sunLongitude = (jd) => {
+    const T = (jd - 2451545) / 36525, rad = Math.PI / 180;
+    const L0 = 280.46646 + 36000.76983 * T + 0.0003032 * T * T;
+    const M = (357.52911 + 35999.05029 * T - 0.0001537 * T * T) * rad;
+    const C = (1.914602 - 0.004817 * T - 0.000014 * T * T) * Math.sin(M) + (0.019993 - 0.000101 * T) * Math.sin(2 * M) + 0.000289 * Math.sin(3 * M);
+    const lambda = L0 + C - 0.00569 - 0.00478 * Math.sin((125.04 - 1934.136 * T) * rad);
+    return ((lambda % 360) + 360) % 360;
+  };
+  const signAt = (jd) => Math.floor(sunLongitude(jd) / 30);
+  const sunSign = (y, m, d) => {
+    const noon = jdn(y, m, d);                       // the Julian Day number is noon UTC of that date
+    const i = signAt(noon), cusp = signAt(noon - 26.5 / 24) !== i || signAt(noon + 24.5 / 24) !== i;
+    return [...SIGNS[i], cusp];
+  };
   const digitSum = (n) => String(Math.abs(n)).split('').reduce((a, b) => a + Number(b), 0);
   const reduce = (n, masters = true) => { let x = Math.abs(n); while (x > 9 && !(masters && [11, 22, 33].includes(x))) x = digitSum(x); return x; };
   const single = (n) => { let x = Math.abs(n); while (x > 9) x = digitSum(x); return x; };
@@ -1010,7 +1161,6 @@ window.BC = (() => {
   const element = (y, m, d) => ['wood', 'fire', 'earth', 'metal', 'water'][Math.floor((((chineseYear(y, m, d) - 4) % 10) + 10) % 10 / 2)];
   const birthCard = (y, m, d) => { let x = digitSum(d + m + y); while (x > 22) x = digitSum(x); return x === 22 ? 0 : x; };
   // BaZi Day Master: the day stem of the continuous sexagenary count (27 Jan 2019 = jia zi)
-  const jdn = (y, m, d) => { const a = Math.floor((14 - m) / 12), yy = y + 4800 - a, mm = m + 12 * a - 3; return d + Math.floor((153 * mm + 2) / 5) + 365 * yy + Math.floor(yy / 4) - Math.floor(yy / 100) + Math.floor(yy / 400) - 32045; };
   const STEMS = ['jia', 'yi', 'bing', 'ding', 'wu', 'ji', 'geng', 'xin', 'ren', 'gui'];
   const dayMaster = (y, m, d) => STEMS[(((jdn(y, m, d) - 1) % 10) + 10) % 10];
   // Feng Shui, Eight Mansions: the year turns at the start of spring
@@ -1026,7 +1176,8 @@ window.BC = (() => {
   // Pythagoras square: the strongest cell
   const square = (y, m, d) => {
     const dd = String(d).padStart(2, '0'), digits = (dd + String(m).padStart(2, '0') + y).split('').map(Number);
-    const w1 = digits.reduce((a, b) => a + b, 0), w2 = digitSum(w1), w3 = Math.abs(w1 - 2 * Number(dd[0])), w4 = digitSum(w3);
+    // as in the app: subtract twice the first digit of the day written WITHOUT a leading zero (05.07.1999 → 40, 4, 30, 3)
+    const w1 = digits.reduce((a, b) => a + b, 0), w2 = digitSum(w1), w3 = w1 - 2 * Number(String(d)[0]), w4 = digitSum(w3);
     const all = [...digits, ...String(w1).split(''), ...String(w2).split(''), ...String(w3).split(''), ...String(w4).split('')].map(Number);
     const cnt = {}; for (let i = 1; i <= 9; i++) cnt[i] = 0; all.forEach((x) => { if (x >= 1) cnt[x]++; });
     const best = [1, 2, 3, 4, 5, 6, 7, 8, 9].sort((a, b) => cnt[b] - cnt[a])[0];
@@ -1041,8 +1192,10 @@ window.BC = (() => {
   const money = (y, m, d) => [single(d), single(m), single(digitSum(y)), single(digitSum(Number(String(d).padStart(2, '0') + String(m).padStart(2, '0') + y)))];
   const LATIN = { a: 1, j: 1, s: 1, b: 2, k: 2, t: 2, c: 3, l: 3, u: 3, d: 4, m: 4, v: 4, e: 5, n: 5, w: 5, f: 6, o: 6, x: 6, g: 7, p: 7, y: 7, h: 8, q: 8, z: 8, i: 9, r: 9 };
   const CYR = { 'а': 1, 'б': 2, 'в': 3, 'г': 4, 'д': 5, 'е': 6, 'ё': 7, 'ж': 8, 'з': 9, 'и': 1, 'й': 2, 'к': 3, 'л': 4, 'м': 5, 'н': 6, 'о': 7, 'п': 8, 'р': 9, 'с': 1, 'т': 2, 'у': 3, 'ф': 4, 'х': 5, 'ц': 6, 'ч': 7, 'ш': 8, 'щ': 9, 'ъ': 1, 'ы': 2, 'ь': 3, 'э': 4, 'ю': 5, 'я': 6 };
+  // Latin accents are dropped as in the app; Russian й and ё stay letters of their own (й = 2, ё = 7)
+  const STRIP = { 'à': 'a', 'á': 'a', 'â': 'a', 'ä': 'a', 'ã': 'a', 'å': 'a', 'è': 'e', 'é': 'e', 'ê': 'e', 'ë': 'e', 'ì': 'i', 'í': 'i', 'î': 'i', 'ï': 'i', 'ò': 'o', 'ó': 'o', 'ô': 'o', 'ö': 'o', 'õ': 'o', 'ù': 'u', 'ú': 'u', 'û': 'u', 'ü': 'u', 'ç': 'c', 'ñ': 'n', 'ß': 's' };
   const nameNumber = (name) => {
-    const words = name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').split(/[\s-]+/).filter(Boolean);
+    const words = [...name.normalize('NFC').toLowerCase()].map((c) => STRIP[c] || c).join('').split(/[\s-]+/).filter(Boolean);
     if (!words.length) return null;
     const per = words.map((w) => reduce([...w].reduce((a, ch) => a + (LATIN[ch] || CYR[ch] || 0), 0)));
     const total = per.reduce((a, b) => a + b, 0);
@@ -1058,26 +1211,28 @@ window.BC = (() => {
       dmNames: { jia: 'Jia · yang Wood', yi: 'Yi · yin Wood', bing: 'Bing · yang Fire', ding: 'Ding · yin Fire', wu: 'Wu · yang Earth', ji: 'Ji · yin Earth', geng: 'Geng · yang Metal', xin: 'Xin · yin Metal', ren: 'Ren · yang Water', gui: 'Gui · yin Water' },
       dirs: { n: 'north', ne: 'north-east', e: 'east', se: 'south-east', s: 'south', sw: 'south-west', w: 'west', nw: 'north-west' },
       pyLine: (n, t, s2) => `${t}. ${s2}`,
-      sqLine: (c, n, t) => `Your strongest cell is ${t.toLowerCase()}: the digit ${c} appears ${n} times in your square.`,
+      sqLine: (c, n, t) => `Your strongest cell is ${t.toLowerCase()}: the digit ${c} appears ${n === 1 ? 'once' : `${n} times`} in your square.`,
       fsLine: (k, g, dir) => `Kua ${k}, ${g} group. Your direction of growth, Sheng Qi, is the ${dir}.`,
       east: 'east', west: 'west', kuaWord: 'Kua',
       mxLine: (w, s2) => `The centre of your matrix is ${w.toLowerCase()}. ${s2}`,
       moLine: (code, t) => `Your money code is ${code}. Its first digit speaks of ${t.toLowerCase()}.`,
       chLine: (t, q) => `${q}`,
       nmNeed: 'Add your name above to read its number.',
+      cusp: 'You were born around the day the Sun changes sign, so your exact sign depends on your birth time and place. The app uses the exact position of the Sun.',
     },
     ru: { sun: 'Солнечный знак', lp: 'Путь жизни', py: 'Личный год', sq: 'Квадрат Пифагора', dm: 'Господин дня Ба-цзы', cn: 'Китайский знак', fs: 'Фэншуй', bc: 'Карта рождения', mx: 'Матрица судьбы', an: 'Ангельское число', ch: 'Глава жизни', mo: 'Денежный код', nm: 'Твоё имя',
       signs: { aries: 'Овен', taurus: 'Телец', gemini: 'Близнецы', cancer: 'Рак', leo: 'Лев', virgo: 'Дева', libra: 'Весы', scorpio: 'Скорпион', sagittarius: 'Стрелец', capricorn: 'Козерог', aquarius: 'Водолей', pisces: 'Рыбы' },
       dmNames: { jia: 'Цзя · ян Дерево', yi: 'И · инь Дерево', bing: 'Бин · ян Огонь', ding: 'Дин · инь Огонь', wu: 'У · ян Земля', ji: 'Цзи · инь Земля', geng: 'Гэн · ян Металл', xin: 'Синь · инь Металл', ren: 'Жэнь · ян Вода', gui: 'Гуй · инь Вода' },
       dirs: { n: 'север', ne: 'северо-восток', e: 'восток', se: 'юго-восток', s: 'юг', sw: 'юго-запад', w: 'запад', nw: 'северо-запад' },
       pyLine: (n, t, s2) => `${t}. ${s2}`,
-      sqLine: (c, n, t) => `Твоя самая сильная клетка: ${t.toLowerCase()}. Цифра ${c} встречается в квадрате ${n} раз.`,
+      sqLine: (c, n, t) => `Твоя самая сильная клетка: ${t.toLowerCase()}. Цифра ${c} встречается в квадрате ${n} ${[2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100) ? 'раза' : 'раз'}.`,
       fsLine: (k, g, dir) => `Гуа ${k}, ${g} группа. Твоё направление роста, Шэн Ци: ${dir}.`,
       east: 'восточная', west: 'западная', kuaWord: 'Гуа',
       mxLine: (w, s2) => `Центр твоей матрицы: ${w.toLowerCase()}. ${s2}`,
       moLine: (code, t) => `Твой денежный код ${code}. Его первая цифра говорит о теме: ${t.toLowerCase()}.`,
       chLine: (t, q) => `${q}`,
       nmNeed: 'Добавь имя выше, чтобы прочитать его число.',
+      cusp: 'Твой день рождения приходится на смену знака Солнца, поэтому точный знак зависит от времени и места рождения. Приложение считает точное положение Солнца.',
     },
   };
   const form = document.getElementById('tryForm');
@@ -1087,13 +1242,21 @@ window.BC = (() => {
     sex = b.dataset.sex; form.querySelectorAll('.seg button').forEach((x) => x.classList.toggle('on', x === b)); if (last) render();
   }));
 
+  const merge = (base, over) => {
+    if (!over) return base;
+    const out = Array.isArray(base) ? [...base] : { ...base };
+    for (const k of Object.keys(over)) out[k] = over[k] && typeof over[k] === 'object' && base[k] && typeof base[k] === 'object' ? merge(base[k], over[k]) : over[k];
+    return out;
+  };
   const card = (art, kind, value, text) => `<div class="r"><div class="ri">${ART(art)}</div><div class="rk">${kind}</div><div class="rv">${value}</div><p>${text}</p></div>`;
 
   function render() {
     const lang = document.documentElement.lang === 'ru' ? 'ru' : 'en';
-    const T = L[lang], S = window.SNIP[lang], EN = window.SNIP.en;
+    const T = L[lang], EN = window.SNIP.en;
+    // Russian speaks to a man in masculine forms when "Man" is chosen
+    const S = lang === 'ru' && sex === 'man' ? merge(window.SNIP.ru, window.SNIP.ruMan) : window.SNIP[lang];
     const [y, m, d] = last.date, now = new Date();
-    const [sign, glyph] = BC.sunSign(m, d);
+    const [sign, glyph, cusp] = BC.sunSign(y, m, d);
     const lp = BC.lifePath(y, m, d);
     const py = BC.personalYear(y, m, d, now.getFullYear());
     const sq = BC.square(y, m, d);
@@ -1108,7 +1271,7 @@ window.BC = (() => {
     const nn = last.name ? BC.nameNumber(last.name) : null;
     const mxT = (S.matrix || EN.matrix)[mx];
     const cards = [
-      card('natal', T.sun, `${glyph} ${T.signs[sign]}`, S.sun[sign]),
+      card('natal', T.sun, `${glyph} ${T.signs[sign]}`, cusp ? `${S.sun[sign]} <em class="cusp">${T.cusp}</em>` : S.sun[sign]),
       card('numerology', T.lp, `${lp} · ${S.lifePath[lp].t}`, S.lifePath[lp].s),
       card('cycles', `${T.py} ${now.getFullYear()}`, String(py), T.pyLine(py, S.personalYear[py].t, S.personalYear[py].s)),
       card('square', T.sq, `${sq.best} · ${S.cells[sq.best]}`, T.sqLine(sq.best, sq.times, S.cells[sq.best])),
@@ -1175,20 +1338,20 @@ window.BC = (() => {
   const SYS = [
     { g: '✎', art: 'name', en: {
         tab: 'The secret of your name', kicker: 'Your name', title: 'What your name carries',
-        lede: 'Your name, researched from name books and history, written for your own spelling, with its numbers and what changes when a surname changes.',
+        lede: 'About 140 names with a full profile, researched from name books and history and found under their many spellings, with the numbers of your name and what changes when a surname changes.',
         list: ['Meaning and origin', 'The story behind the name', 'The roots it grew from', 'Name energy and archetype', 'Personality, strengths and shadow', 'The life path of your name', 'Love, career and social image', 'The name across cultures', 'Name days and famous namesakes', 'Numerology of the name', 'Surname and full-name numbers', 'Name change analysis'] },
       ru: {
         tab: 'Тайна твоего имени', kicker: 'Твоё имя', title: 'Что несёт твоё имя',
-        lede: 'Твоё имя, изученное по книгам имён и истории, в твоём собственном написании, с его числами и тем, что меняется со сменой фамилии.',
+        lede: 'Около 140 имён с полным профилем, изученных по книгам имён и истории и узнаваемых в разных написаниях, с числами твоего имени и тем, что меняется со сменой фамилии.',
         list: ['Значение и происхождение', 'История имени', 'Корни, из которых оно выросло', 'Энергия и архетип имени', 'Характер, сильные стороны и тень', 'Путь твоего имени', 'Любовь, карьера и впечатление', 'Имя в разных культурах', 'Дни имени и известные тёзки', 'Нумерология имени', 'Числа фамилии и полного имени', 'Анализ смены имени'] } },
     { g: '☉', art: 'natal', en: {
         tab: 'Your natal chart', kicker: 'Astrology', title: 'Every planet, a chapter of you',
         lede: 'Your chart calculated to the minute, then read as a story: each planet answers a different question about the same person.',
-        list: ['Your identity (Sun)', 'Your Ascendant and first impression', 'Your public image (Midheaven)', 'The twelve life areas', 'House rulers and empty houses', 'Aspects between your planets', 'Your dominant sign, planet and element', 'North and South Nodes', 'Lilith and Chiron', 'Your sign photos and style guidance'] },
+        list: ['Your identity (Sun)', 'Your Ascendant and first impression', 'Your public image (Midheaven)', 'The twelve life areas', 'House rulers and empty houses', 'Aspects between your planets', 'Your dominant sign, planet and element', 'North and South Nodes', 'Lilith and Chiron', 'Compatibility: synastry and the composite chart'] },
       ru: {
         tab: 'Твоя натальная карта', kicker: 'Астрология', title: 'Каждая планета как глава о тебе',
         lede: 'Твоя карта, рассчитанная до минуты и прочитанная как история: каждая планета отвечает на свой вопрос об одном и том же человеке.',
-        list: ['Твоя личность (Солнце)', 'Асцендент и первое впечатление', 'Публичный образ (Середина неба)', 'Двенадцать сфер жизни', 'Управители домов и пустые дома', 'Аспекты между планетами', 'Доминирующий знак, планета и стихия', 'Северный и Южный узлы', 'Лилит и Хирон', 'Фото твоих знаков и стиль'] } },
+        list: ['Твоя личность (Солнце)', 'Асцендент и первое впечатление', 'Публичный образ (Середина неба)', 'Двенадцать сфер жизни', 'Управители домов и пустые дома', 'Аспекты между планетами', 'Доминирующий знак, планета и стихия', 'Северный и Южный узлы', 'Лилит и Хирон', 'Совместимость: синастрия и композитная карта'] } },
     { g: '7', art: 'numerology', en: {
         tab: 'Numerology', kicker: 'Your numbers', title: 'The numbers of your date and name',
         lede: 'Pythagorean numerology with master numbers kept, each number shown with its working, what it means in love, money and work, and what brings it into minus.',
@@ -1203,9 +1366,9 @@ window.BC = (() => {
         list: ['Character and will', 'Energy', 'Precision and curiosity', 'Physical resource', 'Logic and intuition', 'Diligence', 'Luck', 'Duty and kindness', 'Memory and mind', 'Eight lines of the square', 'Your summary'] },
       ru: {
         tab: 'Квадрат Пифагора', kicker: 'Сетка характера', title: 'Девять клеток, восемь линий, один портрет',
-        lede: 'Психоматрица твоей даты: насколько сильно каждое качество, где ты наполнена и что развиваешь осознанно, и итог простыми словами.',
+        lede: 'Психоматрица твоей даты: насколько сильно каждое качество, где у тебя полнота, а что стоит развивать осознанно, и итог простыми словами.',
         list: ['Характер и воля', 'Энергия', 'Интерес и точность', 'Физический ресурс', 'Логика и интуиция', 'Трудолюбие', 'Удача', 'Долг и доброта', 'Память и ум', 'Восемь линий квадрата', 'Твой итог'] } },
-    { g: '☯', art: 'bazi', en: {
+    { g: '☯\uFE0E', art: 'bazi', en: {
         tab: 'BaZi', kicker: 'Four Pillars of Destiny', title: 'Your elemental blueprint',
         lede: 'The eight characters of your birth, from true solar time and the solar terms, with every calculation traced and the convention named.',
         list: ['Your four pillars', 'Your Day Master', 'Hidden stems', 'The five elements, weighted', 'Day Master strength and why', 'The ten gods', 'Chart dynamics', 'Supportive elements', 'Ten-year luck pillars', 'Your current year', 'How it was calculated'] },
@@ -1232,11 +1395,11 @@ window.BC = (() => {
     { g: '✧', art: 'matrix', en: {
         tab: 'Tarot and the Matrix', kicker: 'Your arcana', title: 'Cards painted for your story',
         lede: 'A tarot deck painted for Birth Code, your birth cards, readings for every question, and the Destiny Matrix of the twenty-two arcana.',
-        list: ['Your personality and soul cards', 'Your card of the year', 'Eleven spreads', 'Love, money and career readings', 'Yes or no, past-present-future', 'The meaning of every card', 'The Destiny Matrix', 'Personal, social and spiritual purpose', 'Money and relationship lines', 'Karmic tail and ancestral lines'] },
+        list: ['Your personality and soul cards', 'Your card of the year', 'Eleven spreads', 'Love, money and career readings', 'Yes or no, past-present-future', 'All 78 cards, painted, with their meanings', 'The Destiny Matrix', 'Personal, social and spiritual purpose', 'Money and relationship lines', 'Karmic tail and ancestral lines'] },
       ru: {
         tab: 'Таро и Матрица', kicker: 'Твои арканы', title: 'Карты, написанные для твоей истории',
         lede: 'Колода Таро, написанная для Birth Code, твои карты рождения, расклады на любой вопрос и Матрица судьбы из двадцати двух арканов.',
-        list: ['Карты личности и души', 'Карта твоего года', 'Одиннадцать раскладов', 'Расклады на любовь, деньги и карьеру', 'Да или нет, прошлое-настоящее-будущее', 'Значение каждой карты', 'Матрица судьбы', 'Личное, социальное и духовное предназначение', 'Денежная линия и линия отношений', 'Кармический хвост и родовые линии'] } },
+        list: ['Карты личности и души', 'Карта твоего года', 'Одиннадцать раскладов', 'Расклады на любовь, деньги и карьеру', 'Да или нет, прошлое-настоящее-будущее', 'Все 78 карт, написанных вручную, и их значения', 'Матрица судьбы', 'Личное, социальное и духовное предназначение', 'Денежная линия и линия отношений', 'Кармический хвост и родовые линии'] } },
     { g: '◷', art: 'cycles', en: {
         tab: 'Life cycles', kicker: 'Your timing', title: 'Where you are in your story',
         lede: 'The time layer of your code: which chapter you are living, which part of your chart is emphasised this year, and the great planetary rhythms ahead.',
@@ -1286,90 +1449,98 @@ window.BC = (() => {
 /* ---------- English and Russian ---------- */
 (() => {
   const RU = {
-    navJourney: 'Путь', jrEyebrow: 'Твой путь', jrTitle: 'От одного мгновения<br><em>к целой жизни.</em>',
-    jrLede: 'Шесть шагов: от минуты твоего рождения до портрета того, кто ты есть. Листай вниз и пройди Birth Code так, как пройдёшь его в телефоне.',
-    jr1t: 'Момент твоего <em>рождения</em>', jr1p: 'Дата, время и место. Birth Code считает твою карту прямо в телефоне, с точностью до угловой минуты, за несколько секунд.',
-    jr2t: 'Твоё небо, <em>нарисованное</em>', jr2p: 'Каждая планета, дом и аспект того момента, когда ты пришла, в карте, которую можно открыть и прочитать планету за планетой.',
-    jr3t: 'Десять систем, <em>один человек</em>', jr3p: 'Астрология, нумерология, твоё имя, квадрат Пифагора, Ба Цзы, фэншуй, таро и не только: у каждой своя глава о тебе.',
-    jr4t: 'Твой день <em>по твоей карте</em>', jr4p: 'Каждое утро: Луна, твоя энергия, твой цвет, маленький ритуал и лучшие часы дня там, где ты сейчас.',
-    jr5t: 'Спроси <em>карты</em>', jr5p: 'Вопрос, карта, да или нет. Одиннадцать раскладов для любви, денег, работы и выбора между ними.',
-    jr6t: 'Всё <em>в одном итоге</em>', jr6p: 'Кто ты, твои дары, твои вызовы и твой путь, собранные в один портрет. Твой код в трёх словах.',
-    jrS1e: 'Данные рождения', jrS1t: 'Начни с себя', jrName: 'Имя', jrDate: 'Дата', jrTime: 'Время', jrPlace: 'Место', jrReveal: 'Открыть мой код',
-    jrS2e: 'Натальная карта', jrS2t: 'Твоё небо', jrSun: 'Солнце', jrMoon: 'Луна', jrAsc: 'Асцендент',
-    jrS3t: 'Твои коды', jrS3s: 'Всё, что говорит о тебе твоё рождение.', jrC1: 'Тайна твоего имени', jrC2: 'Астрология', jrC3: 'Нумерология', jrC4: 'Квадрат Пифагора', jrC5: 'Циклы жизни', jrC6: 'Восточные системы', jrC7: 'Таро',
-    jrS4t: 'Добрый<br>вечер', jrS4e: 'Растущая Луна · 91%', jrEnergy: 'Энергия', jrDay: 'День', jrColour: 'Цвет', jrS4k: 'Твоя энергия', jrScorpio: 'Скорпион', jrS4p: 'Сегодня твой голос слышен. Говори меньше. Имей в виду больше.',
-    jrS5e: 'Спроси карты', jrS5t: 'Сказать да?', jrYes: 'Да', jrStar: 'Звезда: надежда, которая восстанавливает себя.',
-    jrS6e: 'Профиль', jrS6h: 'Глубокая, интуитивная хранительница', jrK1: 'Нежность · интуиция', jrK2: 'Смелость · скорость', jrK3: 'Глубина · магнетизм', jrS6w: 'Твой код в трёх словах', jrWords: 'Корни · Вес · Равновесие',
-    navSystems: 'Системы', navArt: 'Твоя карта', navHow: 'Как это работает',
+    navTry: 'Попробовать', navAsk: 'Спроси карты', navSystems: 'Системы', navJourney: 'Путь', navPrices: 'Цены',
     eyebrow: 'Твой личный код',
     tagline: 'Записан в небе в момент твоего рождения. Прочитай его наконец, в одном красивом месте.',
-    ctaMain: 'Скачать Birth Code', ctaSecond: 'Посмотреть, что внутри', scroll: 'Листай',
-    sysEyebrow: 'Все системы, одна ты',
-    sysTitle: 'Десять древних языков.<br><em>Одна история о тебе.</em>',
-    sysLede: 'Birth Code читает твою дату, время, место и имя через великие традиции самопознания, и каждая добавляет новый слой, а не повторяет предыдущую.',
-    c1t: 'Твоя натальная карта', c1p: 'Каждая планета как глава: что она значит, как её окрашивает твой знак и где в жизни она живёт.',
-    c2t: 'Тайна твоего имени', c2p: 'Его значение, корни, архетип и числа, в твоём собственном написании.',
-    c3t: 'Нумерология', c3p: 'Твой путь жизни, личный год, денежный код и квадрат Пифагора.',
-    c4t: 'Ба-цзы и фэншуй', c4p: 'Твои четыре столпа, Господин дня, стихии и направления, которые тебя поддерживают.',
-    c5t: 'Таро и Матрица судьбы', c5p: 'Твои арканы рождения, расклады с картами, написанными вручную, и двадцать две энергии твоей даты.',
-    c6t: 'Жизненные циклы', c6p: 'Глава, которую ты проживаешь сейчас, и планетарные ритмы, которые складывают годы впереди.',
-    artEyebrow: 'Узнай себя',
-    artTitle: 'Твой код рождения это карта.<br><em>Эта жизнь и есть путь.</em>',
-    artLede: 'Birth Code это не гороскоп. Это способ узнать себя: прочитать карту, с которой ты пришла, понять, почему ты чувствуешь то, что чувствуешь, и идти своей дорогой в этой жизни яснее.',
-    st1t: 'Кто ты', st1p: 'Твой асцендент: как ты приходишь в мир и какой тебя видят первой.',
-    st2t: 'Что ты чувствуешь', st2p: 'Твоя Луна: что тебе нужно, чтобы чувствовать себя в безопасности, когда никто не смотрит.',
-    st3t: 'Твоя природа', st3p: 'Твой Господин дня: стихия, с которой ты родилась, на языке Ба-цзы.',
-    st4t: 'Твой знак Востока', st4p: 'Твоё китайское животное и стихия, по настоящему Новому году твоего рождения.',
-    st5t: 'Твой путь', st5p: 'Твоя Матрица судьбы и Таро: направление, которое зовёт тебя расти.',
-    artClose: 'Каждая система добавляет свой слой. <em>Вместе они становятся твоей картой.</em>',
-    qEyebrow: 'Наше обещание',
-    quote: 'Твоя карта не говорит, кем ты должна стать. Она даёт тебе <span>язык для той, кто ты уже есть.</span>',
-    howEyebrow: 'Как это работает',
-    howTitle: 'Три минуты.<br><em>Чтение на всю жизнь.</em>',
-    s1t: 'Расскажи, когда ты пришла', s1p: 'Дата, время и место рождения. И твоё имя, если хочешь узнать и его тайну.',
-    s2t: 'Мы считаем точно', s2p: 'Настоящие эфемериды, истинное солнечное время, опубликованные методики. Каждый расчёт показан, ничего не угадано.',
-    s3t: 'Ты читаешь себя', s3p: 'Глава за главой, система за системой, по-русски или по-английски, когда захочешь.',
-    fEyebrow: 'Скоро в App Store',
-    fTitle: 'Твой код давно ждёт.<br><em>Приходи его прочитать.</em>',
-    fCta: 'Скоро в App Store', fSoon: 'iPhone · русский и английский',
-    footNote: 'Сделано с любовью, под звёздами.',
-    navTry: 'Попробовать', navAsk: 'Спроси карты',
+    ctaTry: 'Попробовать сейчас', ctaMain: 'Скачать Birth Code', ctaSecond: 'Посмотреть, что внутри', scroll: 'Листай',
+
+    jrEyebrow: 'Твой путь', jrTitle: 'От одного мгновения<br><em>к целой жизни.</em>',
+    jrLede: 'Шесть шагов: от минуты твоего рождения до стиля, в котором ты узнаёшь себя. Листай вниз и пройди Birth Code так, как пройдёшь его в телефоне.',
+    jr1t: 'Момент твоего <em>рождения</em>', jr1p: 'Дата, время и место. Birth Code считает твою карту прямо в телефоне, с точностью до угловой минуты, за несколько секунд.',
+    jr2t: 'Твоё небо, <em>нарисованное</em>', jr2p: 'Каждая планета, дом и аспект момента твоего рождения, в карте, которую можно открыть и прочитать планету за планетой.',
+    jr3t: 'Десять систем, <em>один человек</em>', jr3p: 'Астрология, нумерология, твоё имя, квадрат Пифагора, Ба-цзы, фэншуй, Таро и не только: у каждой своя глава о тебе.',
+    jr4t: 'Твой день <em>по твоей карте</em>', jr4p: 'Каждое утро: Луна и её фаза, небо на твоей карте, твой личный день, твой цвет и карта дня.',
+    jr5t: 'Спроси <em>карты</em>', jr5p: 'В «Раскладах»: вопрос, карта, да или нет. Одиннадцать раскладов для любви, денег и работы и все 78 карт, написанных вручную.',
+    jr6t: 'Твой стиль <em>по твоей карте</em>', jr6p: 'Восемнадцать блоков, в каждом три конкретных шага. Микс энергий, формула стиля, палитра, мудборды и «Кто тебе подходит».',
+    jrS1e: 'Данные рождения', jrS1t: 'Начни с себя', jrName: 'Имя', jrDate: 'Дата', jrTime: 'Время', jrPlace: 'Место', jrReveal: 'Открыть мой код',
+    jrS2e: 'Натальная карта', jrS2t: 'Твоё небо', jrSun: 'Солнце', jrMoon: 'Луна', jrAsc: 'Асцендент',
+    jrS3t: 'Твои коды', jrS3s: 'Всё, что говорит о тебе твоё рождение.', jrC1: 'Тайна твоего имени', jrC2: 'Астрология', jrC3: 'Нумерология', jrC4: 'Квадрат Пифагора', jrC5: 'Циклы жизни', jrC6: 'Восточные системы', jrC7: 'Таро', jrC8: 'Ангельские числа',
+    jrS4t: 'Добрый<br>вечер', jrS4e: 'Растущая Луна · 91%', jrEnergy: 'Энергия', jrDay: 'День', jrColour: 'Цвет', jrS4k: 'Твоя энергия', jrTaurus: 'Телец', jrS4p: 'Спокойный, заземлённый день. Говори меньше, и пусть каждое слово весит больше.',
+    jrS5e: 'Спроси карты', jrS5t: 'Сказать да?', jrYes: 'Да', jrStar: 'Звезда: надежда, которая восстанавливает себя.',
+    jrS6e: 'Профиль', jrAnna: 'Анна', jrS6m: 'Твой микс', jrAriesE: 'Энергия Овна', jrGeminiE: 'Энергия Близнецов', jrTaurusE: 'Энергия Тельца', jrK1: '18 блоков', jrK2: 'Формула стиля', jrK3: 'Кто подходит',
+
     tryEyebrow: 'Попробуй сейчас',
+    tryTitle: 'Попробуй каждую систему.<br><em>По одной фразе.</em>',
+    tryLede: 'Введи дату рождения и, если хочешь, имя. Каждая система Birth Code ответит одной-двумя фразами, посчитанными по тем же правилам, что и в приложении. Полное прочтение ждёт внутри.',
+    fDate: 'Дата рождения', fName: 'Имя, по желанию', fNamePh: 'Анна', fSex: 'Женщина или мужчина', fWoman: 'Женщина', fMan: 'Мужчина',
+    tryBtn: 'Открыть мой код', tryFine: 'Ничего из введённого не покидает эту страницу.',
+
     askEyebrow: 'Спроси карты', askTitle: 'Вопрос, на который<br><em>есть да или нет.</em>',
     askLede: 'Держи в мыслях один ясный вопрос, напиши его, если хочешь, и вытяни карту из колоды Birth Code.',
     askPh: 'Стоит ли мне согласиться?', askBtn: 'Вытянуть карту', askFine: 'Карта это зеркало для твоих мыслей, а не предсказание.',
-    fNamePh: 'Карина',
-    fDate: 'Дата рождения', fName: 'Имя, по желанию', fSex: 'Для фэншуй', fWoman: 'Женщина', fMan: 'Мужчина',
-    tryTitle: 'Попробуй каждую систему.<br><em>По одной фразе.</em>',
-    tryLede: 'Введи дату рождения и, если хочешь, имя. Каждая система Birth Code ответит одной-двумя фразами, посчитанными точно как в приложении. Полное прочтение ждёт внутри.',
-    tryBtn: 'Открыть мой код', tryFine: 'Ничего из введённого не покидает эту страницу.',
-    n1: 'традиций', n2: 'карт Таро, написанных вручную', n3: 'изученных имён', n4: 'языка',
-    faqEyebrow: 'Вопросы', faqTitle: 'Прежде чем <em>начать.</em>',
-    q1: 'Birth Code это только астрология?', a1: 'Нет. Астрология здесь одна из десяти систем. Также есть нумерология, квадрат Пифагора, тайна имени, Ба-цзы, фэншуй, китайская астрология, Таро с Матрицей судьбы, ангельские числа и твои жизненные циклы.',
-    q2: 'Насколько точны расчёты?', a2: 'Твоя карта строится по реальным положениям планет для твоего времени и места. Ба-цзы учитывает истинное солнечное время и солнечные сезоны. Каждый метод назван в приложении, а каждый расчёт показан, чтобы ты могла его проверить.',
-    q3: 'Нужно ли знать время рождения?', a3: 'Оно помогает. Без него ты всё равно получишь большую часть своего кода; только то, что зависит от часа, например асцендент, дома и столп часа в Ба-цзы, не угадывается, а просто не показывается.',
-    q4: 'Это предсказание будущего?', a4: 'Нет. Birth Code относится к этим традициям как к символическим языкам для самопознания, а не к гаданию. Он не говорит, что случится; он помогает понять то, что в тебе уже есть.',
-    navToday: 'Твой день',
+
+    inEyebrow: 'Внутри приложения', inTitle: 'Четыре вкладки.<br><em>Всё на своём месте.</em>',
+    inLede: 'Birth Code устроен так, как ты будешь им пользоваться: страница на сегодня, твои коды, расклады и профиль с твоим стилем.',
+    in1t: 'Сегодня', in1p: 'Каждое утро день, прочитанный по твоей карте: Луна, небо на твоих планетах, личные числа, твой цвет и карта дня.',
+    in2t: 'Коды', in2p: 'Десять систем, у каждой своя глава: имя, натальная карта, нумерология, квадрат Пифагора, жизненные циклы, Ба-цзы, китайский зодиак, фэншуй, Таро с Матрицей судьбы и ангельские числа. И совместимость с теми, кого ты сохранишь, от синастрии до композитной карты.',
+    in3t: 'Расклады', in3p: 'Карта дня и одиннадцать иллюстрированных раскладов, среди них любовь, деньги, карьера, решение, да или нет, прошлое-настоящее-будущее, месяц и год. Все 78 карт написаны вручную.',
+    in4t: 'Профиль и стиль', in4p: 'Восемнадцать блоков читают положения планет именно в твоей карте, в каждом заголовок и три конкретных шага. Твой микс энергий, гид по стилю для каждой энергии, формула стиля и палитра, мудборды, которые ты собираешь по-своему, страницы о работе, любви, аромате и доме и «Кто тебе подходит».',
+    inEdition: 'Женская и мужская версии, каждая написана полностью. На русском и на английском.',
+
+    sysEyebrow: 'Все системы, одна история о тебе',
+    sysTitle: 'Десять древних языков.<br><em>Одна история о тебе.</em>',
+    sysLede: 'Birth Code читает твою дату, время, место и имя через великие традиции самопознания, и каждая добавляет новый слой, а не повторяет предыдущую.',
+    n1: 'традиций', n2: 'карт Таро, написанных вручную', n3: 'имён с полным профилем', n4: 'языка',
+
     tdEyebrow: 'Каждое утро', tdTitle: 'Твой день, прочитанный<br><em>по твоей карте.</em>',
-    tdLede: 'Сегодняшний день написан для тебя, а не для твоего знака. Небо дня накладывается на твою натальную карту, личные числа и карты.',
-    d1t: 'Луна сегодня', d1p: 'Её фаза, растёт она или убывает, её знак и для чего она хороша: красота, новый режим, учёба, отдых.',
-    d2t: 'Твоя энергия', d2p: 'Тема твоего дня, твоё число личного дня и то, чего планеты касаются в твоей карте.',
-    d3t: 'Стиль сегодня', d3p: 'Цвет дня, золото или серебро, настроение образа, красота и аромат.',
-    d4t: 'Карта дня', d4p: 'Одна карта, закрытая, пока ты её не откроешь, и то, о чём она просит тебя сегодня.',
-    d5t: 'Твой гороскоп', d5p: 'Любовь, работа, деньги и энергия по реальным транзитам к твоим планетам.',
-    d6t: 'Подсказки', d6p: 'Для чего хорош день, чего избегать, твои лучшие часы, счастливое число и символ.',
+    tdLede: 'Сегодняшний день написан для тебя, а не для твоего знака. Небо дня накладывается на твою натальную карту, личные числа и карты, и это бесплатно, каждый день.',
+    d1t: 'Луна сегодня', d1p: 'Её фаза, растёт она или убывает, и знак, через который она идёт.',
+    d2t: 'Небо на твоей карте', d2p: 'Каких твоих планет сегодня касается небо и что это может поднять.',
+    d3t: 'Твои личные числа', d3p: 'Личный год, месяц и день, и тема, которую задаёт каждое из них.',
+    d4t: 'Как проявиться', d4p: 'Через твой Асцендент и твою Венеру: как держаться сегодня и что вынести вперёд.',
+    d5t: 'Цвет дня', d5p: 'Один цвет, выбранный для твоего дня, чтобы надеть его или просто держать рядом.',
+    d6t: 'Карта дня', d6p: 'Одна карта, закрытая, пока ты её не откроешь, и то, о чём она просит тебя сегодня.',
+
     trEyebrow: 'Сделано с заботой', trTitle: 'Красиво и<br><em>точно.</em>',
     t1t: 'Настоящая астрономия', t1p: 'Положения планет на твою минуту и место, с историческим часовым поясом твоего города.',
     t2t: 'Названные методики', t2p: 'Дома по Плациду, профекции целыми знаками, истинный узел, истинное солнечное время и Личунь в Ба-цзы, 22 аркана Ладини для Матрицы, Восемь дворцов для фэншуй.',
-    t3t: 'Каждый шаг показан', t3p: 'Путь жизни, денежный код, матрица и число Гуа показывают свой расчёт, чтобы ты могла проверить сама.',
+    t3t: 'Каждый шаг показан', t3p: 'Путь жизни, денежный код, матрица и число Гуа показывают свой расчёт, чтобы всё можно было проверить самостоятельно.',
     t4t: 'Проверено', t4p: 'Больше сотни автоматических проверок по опубликованным картам и известным датам держат каждый расчёт честным.',
     t5t: 'Твои данные твои', t5p: 'Твои данные рождения живут на твоём телефоне. Чтобы прочитать свой код, аккаунт не нужен.',
-    t6t: 'Честно по замыслу', t6p: 'Это символические языки для познания себя. Birth Code не предсказывает события и не говорит, какой ты должна быть.',
+    t6t: 'Честно по замыслу', t6p: 'Это символические языки для познания себя. Birth Code не предсказывает события и не говорит, каким человеком тебе нужно быть.',
+
+    qEyebrow: 'Наше обещание',
+    quote: 'Твоя карта не говорит, кем тебе нужно стать. Она даёт тебе <span>язык для того, кто ты уже есть.</span>',
+    howEyebrow: 'Как это работает',
+    howTitle: 'Три минуты.<br><em>Чтение на всю жизнь.</em>',
+    s1t: 'Расскажи о своём рождении', s1p: 'Дата, время и место рождения. И твоё имя, если хочешь узнать и его тайну.',
+    s2t: 'Мы считаем точно', s2p: 'Настоящие эфемериды, истинное солнечное время, опубликованные методики. Каждый расчёт показан, ничего не угадано.',
+    s3t: 'Ты читаешь себя', s3p: 'Глава за главой, система за системой, по-русски или по-английски, когда захочешь.',
+
+    prEyebrow: 'Цены', prTitle: 'Начни бесплатно.<br><em>Открой всё, когда захочешь.</em>',
+    prFreeK: 'Бесплатно', prFreeT: 'Birth Code',
+    prF1: '«Сегодня», каждый день', prF2: 'Карта дня', prF3: 'Начало каждой страницы, чтобы увидеть, что в ней',
+    prPremK: 'Всё', prPremT: 'Birth Code Premium',
+    prP1: 'Каждый код, расклад и страница о стиле целиком', prP2: 'Все 18 блоков, формула стиля, палитры и мудборды', prP3: 'Совместимость, все расклады и все 78 карт',
+    prBest: 'Выгоднее всего', plM: 'Ежемесячно', plMp: 'в месяц', plMl: 'Для одного вопроса, который важен сейчас: отношения, переезд, решение.', plMs: 'Отмена в любой момент', plY: 'На год', plYp: 'в год', plYl: 'Пройди каждый сезон своего неба: транзиты, личные месяцы, Луна и твои циклы.', plYs: '3 дня бесплатно', plL: 'Навсегда', plLp: 'один раз, на всю жизнь', plLl: 'Вся твоя личная карта в кармане, навсегда и в одном месте.', plLs: 'Один платёж', plIncl: 'Каждый план открывает всё',
+    prFine: 'В App Store цены показываются в твоей местной валюте. Оплату проводит Apple; подписки продлеваются автоматически, и отменить их можно в любой момент в настройках Apple ID.',
+
+    faqEyebrow: 'Вопросы', faqTitle: 'Прежде чем <em>начать.</em>',
+    q1: 'Birth Code это только астрология?', a1: 'Нет. Астрология здесь одна из десяти систем. Также есть нумерология, квадрат Пифагора, тайна имени, Ба-цзы, фэншуй, китайская астрология, Таро с Матрицей судьбы, ангельские числа и твои жизненные циклы.',
+    q2: 'Насколько точны расчёты?', a2: 'Твоя карта строится по реальным положениям планет для твоего времени и места. Ба-цзы учитывает истинное солнечное время и солнечные сезоны. Каждый метод назван в приложении, а каждый расчёт показан, чтобы его можно было проверить.',
+    q3: 'Нужно ли знать время рождения?', a3: 'Оно помогает. Без него ты всё равно получишь большую часть своего кода; только то, что зависит от часа, например асцендент, дома и столп часа в Ба-цзы, не угадывается, а просто не показывается.',
+    q4: 'Это предсказание будущего?', a4: 'Нет. Birth Code относится к этим традициям как к символическим языкам для самопознания, а не к гаданию. Он не говорит, что случится; он помогает понять то, что в тебе уже есть.',
+    q5: 'Где хранятся мои данные?', a5: 'Твои данные рождения хранятся на твоём телефоне. Чтобы прочитать свой код, аккаунт не нужен.',
     q6: 'На каких языках приложение?', a6: 'На английском и русском, полностью написано на обоих, и язык можно переключить вверху любой страницы.',
     q7: 'Можно читать партнёра и друзей?', a7: 'Да. Сохрани тех, кто тебе важен, и читай совместимость, от гармонии стихий до реальных связей между вашими картами.',
     q8: 'Почему разные приложения дают разные результаты?', a8: 'Потому что школы используют разные правила: системы домов, границу дня в Ба-цзы, способ сведения чисел. Birth Code выбирает одно правило для каждой системы, называет его и применяет одинаково для всех.',
-    q9: 'Это только для женщин?', a9: 'Birth Code написан с мыслью о женщинах, по тону и по советам об образе и стиле. Мужчины тоже могут прочитать свой код, в сокращённой версии.',
-    q5: 'Где хранятся мои данные?', a5: 'Твои данные рождения хранятся на твоём телефоне. Чтобы прочитать свой код, аккаунт не нужен.',
+    q9: 'Это только для женщин?', a9: 'Нет. В Birth Code есть женская и мужская версии, каждая написана полностью, со своим тоном и своими советами о стиле. Версию выбираешь вместе с данными рождения и можешь сменить её в любой момент.',
+
+    fEyebrow: 'Скоро в App Store', fEyebrowLive: 'Уже в App Store',
+    fTitle: 'Твой код давно ждёт.<br><em>Приходи его прочитать.</em>',
+    fCta: 'Скоро в App Store', fStore: 'Скачать в App Store', fSoon: 'iPhone · русский и английский',
+    footNote: 'Сделано с любовью, под звёздами.', footPrivacy: 'Конфиденциальность', footTerms: 'Условия', footSupport: 'Поддержка',
+    footPublisher: 'Издатель: Loaded AG, Klostergutstrasse 4, 8252 Schlatt TG, Швейцария · UID CHE-413.943.367',
   };
   const EN = {}, PH = {};
   document.querySelectorAll('[data-i18n-ph]').forEach((el) => { PH[el.dataset.i18nPh] = el.placeholder; });

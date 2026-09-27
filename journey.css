@@ -44,11 +44,11 @@
 .wheel-legend { display: flex; justify-content: space-between; margin-top: 16px; font-family: var(--display); font-size: 15px; color: var(--ivory-soft); }
 .wheel-legend b { display: block; color: var(--gold-light); font-weight: 500; font-size: 20px; }
 /* 3 · codes */
-.row3 { display: flex; align-items: center; gap: 10px; margin-top: 9px; padding: 9px 10px; border: 1px solid rgba(216, 182, 124, .2); border-radius: 16px; background: rgba(17, 25, 52, .8); opacity: 0; transform: translateX(26px); transition: opacity .5s ease, transform .6s cubic-bezier(.2,.8,.2,1); }
+.row3 { display: flex; align-items: center; gap: 10px; margin-top: 7px; padding: 7px 10px; border: 1px solid rgba(216, 182, 124, .2); border-radius: 16px; background: rgba(17, 25, 52, .8); opacity: 0; transform: translateX(26px); transition: opacity .5s ease, transform .6s cubic-bezier(.2,.8,.2,1); }
 .scr.on .row3 { opacity: 1; transform: none; }
 .row3 .num { font-family: var(--display); font-size: 12px; color: var(--gold); width: 16px; }
 .row3 .ic { width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(216, 182, 124, .5); display: grid; place-items: center; color: var(--gold-light); font-size: 13px; }
-.row3 .nm { font-family: var(--display); font-size: 16px; flex: 1; }
+.row3 .nm { font-family: var(--display); font-size: 16px; line-height: 1.15; flex: 1; }
 .row3 .go { width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(216, 182, 124, .45); display: grid; place-items: center; color: var(--gold-light); font-size: 11px; }
 /* 4 · today */
 .today-top { display: flex; justify-content: space-between; align-items: flex-start; }
@@ -67,20 +67,26 @@
 .scr.on .card5 .in { transform: rotateY(0deg); }
 .card5 .f, .card5 .b { position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden; border: 1px solid rgba(216, 182, 124, .5); display: grid; place-items: center; }
 .card5 .f { background: radial-gradient(circle at 50% 30%, #1E2754, #0B1024); }
-.card5 .b { transform: rotateY(180deg); background: repeating-linear-gradient(45deg, rgba(216,182,124,.08) 0 2px, transparent 2px 10px), #10183A; }
+.card5 .b { transform: rotateY(180deg); background: #10183A url(img/tarot/back.jpg) center / cover no-repeat; }
+.card5 .f.painted { background: #0B1024 url(img/tarot/17.jpg) center / cover no-repeat; }
 .card5 .f .art { width: 80%; height: 80%; }
 .answer { text-align: center; margin-top: 16px; font-family: var(--display); font-size: 30px; color: var(--gold-light); opacity: 0; transition: opacity .6s 1.4s; }
 .scr.on .answer { opacity: 1; }
 .answer small { display: block; font-size: 13px; color: var(--ivory-soft); font-style: italic; }
-/* 6 · the conclusion */
+/* 6 · your style: the energy mix from the Profile, and the style pages it opens */
 .prof .name { font-family: var(--display); font-size: 40px; line-height: 1; margin-top: 6px; }
-.prof .hl { font-family: var(--display); font-size: 21px; line-height: 1.15; margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(216, 182, 124, .2); }
+.mix { margin-top: 16px; padding: 12px 14px 6px; border-radius: 18px; border: 1px solid rgba(216, 182, 124, .25); background: rgba(17, 25, 52, .8); }
+.mix small { display: block; font-size: 8.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--ivory-faint); margin-bottom: 4px; }
+.mixrow { position: relative; display: grid; grid-template-columns: 22px 1fr auto; align-items: center; gap: 8px; padding: 7px 0 11px; font-family: var(--display); font-size: 15px; }
+.mixrow b { color: var(--gold-light); font-weight: 500; font-size: 17px; }
+.mixrow i { font-style: normal; font-family: var(--body); font-size: 11px; color: var(--gold-light); }
+.mixrow u { position: absolute; left: 30px; right: 0; bottom: 4px; height: 3px; border-radius: 3px; background: rgba(216, 182, 124, .14); text-decoration: none; }
+.mixrow u::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: inherit; background: linear-gradient(90deg, var(--gold-deep), var(--gold-light)); transition: width 1.4s cubic-bezier(.2,.8,.2,1) .3s; }
+.scr.on .mixrow u::after { width: var(--w); }
 .keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 12px; }
-.keys div { font-family: var(--display); font-size: 12.5px; color: var(--ivory); opacity: 0; transition: opacity .6s; }
+.keys div { font-family: var(--display); font-size: 12.5px; color: var(--gold-light); text-align: center; padding: 10px 4px; border-radius: 14px; border: 1px solid rgba(216, 182, 124, .22); background: linear-gradient(135deg, #141C3A, #252B5C); opacity: 0; transition: opacity .6s; }
 .scr.on .keys div { opacity: 1; }
-.keys span { display: block; font-family: var(--body); font-size: 9.5px; color: var(--ivory-faint); margin-top: 2px; }
-.words3 { margin-top: 16px; padding: 14px; border-radius: 16px; border: 1px solid rgba(216, 182, 124, .3); background: linear-gradient(135deg, #141C3A, #252B5C); font-family: var(--display); font-size: 20px; color: var(--gold-light); text-align: center; }
-.words3 small { display: block; font-family: var(--body); font-size: 8.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--ivory-faint); margin-bottom: 6px; }
+.keys span { display: block; font-family: var(--body); font-size: 9.5px; color: var(--ivory); margin-top: 3px; }
 @media (max-width: 900px) {
   .jr-sticky { grid-template-columns: 1fr; grid-template-rows: auto auto; align-content: center; gap: 18px; padding-top: 70px; }
   .jr-phone { width: 250px; height: 516px; border-radius: 40px; order: -1; }
@@ -94,7 +100,7 @@
   .jr-bignum { display: none; }
   .scr { padding: 50px 18px 18px; zoom: .84; }
 }
-@media (prefers-reduced-motion: reduce) { .scr, .jr-step, .row3, .glance div { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .scr, .jr-step, .row3, .glance div, .mixrow u::after { transition: none; } }
 /* ---------- the hero dust: a living constellation that moves away from the hand ---------- */
 #dust { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
 .hero > *:not(#dust):not(.ring):not(.scroll-hint) { position: relative; z-index: 1; }
