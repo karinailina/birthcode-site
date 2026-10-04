@@ -203,6 +203,14 @@
   }
 
   /* a day with Birth Code */
+  .world .worldmap { margin: 48px auto 0; max-width: 1080px; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 30px 80px rgba(0,0,0,0.35); }
+  .world .worldmap img { display: block; width: 100%; height: auto; }
+  .worlditems { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1080px; margin: 22px auto 0; }
+  .worlditem { padding: 20px 22px; border-radius: 18px; border: 1px solid var(--line); background: rgba(255,255,255,0.025); }
+  .worlditem b { display: block; font-family: var(--display); font-weight: 600; font-size: 24px; color: var(--gold-light); }
+  .worlditem span { display: block; font-size: 14.5px; color: var(--ivory-soft); margin-top: 4px; }
+  .world .fine { font-size: 13.5px; color: var(--ivory-faint); margin: 22px auto 0; max-width: 680px; text-align: center; }
+  @media (max-width: 900px) { .worlditems { grid-template-columns: 1fr 1fr; } .world .worldmap img { height: 250px; object-fit: cover; object-position: 62% 50%; } }
   .day { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 56px; }
   .dayitem { padding: 26px 24px; border-radius: 20px; border: 1px solid var(--line); background: rgba(255, 255, 255, 0.025); transition: border-color .3s ease, transform .3s ease; }
   .dayitem:hover { border-color: rgba(216, 182, 124, 0.5); transform: translateY(-3px); }
@@ -651,6 +659,22 @@
         <div class="dayitem reveal"><div class="dayimg" style="background-image:url(img/day/colour.jpg)"></div><b data-i18n="d5t">Colour of the day</b><span data-i18n="d5p">One colour chosen for your day, to wear or simply to keep close.</span></div>
         <div class="dayitem reveal"><div class="dayimg" style="background-image:url(img/day/card.jpg)"></div><b data-i18n="d6t">Card of the day</b><span data-i18n="d6p">One card, face down until you turn it, with what it asks of you today.</span></div>
       </div>
+    </div>
+  </section>
+
+  <section id="world" class="world">
+    <div class="wrap">
+      <div class="eyebrow reveal" data-i18n="wdEyebrow">Your World</div>
+      <h2 class="reveal" data-i18n-html="wdTitle">Where on Earth<br><em>do you shine?</em></h2>
+      <p class="lede reveal" data-i18n="wdLede">At the moment you were born, every planet stood over its own line on the Earth. Birth Code draws your lines on the world map and shows which places may bring you love, work, a sense of home and growth, with the real distance to every city.</p>
+      <div class="worldmap reveal"><img src="img/world-map.svg" alt="" loading="lazy"></div>
+      <div class="worlditems">
+        <div class="worlditem reveal"><b data-i18n="wd1t">Love</b><span data-i18n="wd1p">Romance, attraction, partnership.</span></div>
+        <div class="worlditem reveal"><b data-i18n="wd2t">Career</b><span data-i18n="wd2p">Recognition, ambition, success at work.</span></div>
+        <div class="worlditem reveal"><b data-i18n="wd3t">Home</b><span data-i18n="wd3p">Belonging, family, feeling rooted.</span></div>
+        <div class="worlditem reveal"><b data-i18n="wd4t">Growth</b><span data-i18n="wd4p">Luck, learning, new horizons.</span></div>
+      </div>
+      <p class="fine reveal" data-i18n="wdFine">Search any city, compare up to four places and see your chart moved there. Distances are real, the meaning is symbolic.</p>
     </div>
   </section>
 
@@ -1522,7 +1546,7 @@ window.BC = (() => {
     prF1: '«Сегодня», каждый день', prF2: 'Карта дня', prF3: 'Начало каждой страницы, чтобы увидеть, что в ней',
     prPremK: 'Всё', prPremT: 'Birth Code Premium',
     prP1: 'Каждый код, расклад и страница о стиле целиком', prP2: 'Все 18 блоков, формула стиля, палитры и мудборды', prP3: 'Совместимость, все расклады и все 78 карт',
-    prBest: 'Выгоднее всего', plM: 'Ежемесячно', plMp: 'в месяц', plMl: 'Для одного вопроса, который важен сейчас: отношения, переезд, решение.', plMs: 'Отмена в любой момент', plY: 'На год', plYp: 'в год', plYl: 'Пройди каждый сезон своего неба: транзиты, личные месяцы, Луна и твои циклы.', plYs: '3 дня бесплатно', plL: 'Навсегда', plLp: 'один раз, на всю жизнь', plLl: 'Вся твоя личная карта в кармане, навсегда и в одном месте.', plLs: 'Один платёж', plIncl: 'Каждый план открывает всё',
+    wdEyebrow: 'Твой мир', wdTitle: 'Где на Земле<br><em>ты сияешь?</em>', wdLede: 'В момент твоего рождения каждая планета стояла над своей линией на Земле. Birth Code рисует твои линии на карте мира и показывает, какие места могут принести любовь, работу, чувство дома и рост, с настоящим расстоянием до каждого города.', wd1t: 'Любовь', wd1p: 'Романтика, притяжение, партнёрство.', wd2t: 'Карьера', wd2p: 'Признание, амбиции, успех в работе.', wd3t: 'Дом', wd3p: 'Принадлежность, семья, ощущение корней.', wd4t: 'Рост', wd4p: 'Удача, учёба, новые горизонты.', wdFine: 'Найди любой город, сравни до четырёх мест и посмотри свою карту, перенесённую туда. Расстояния настоящие, смысл символический.', prBest: 'Выгоднее всего', plM: 'Ежемесячно', plMp: 'в месяц', plMl: 'Для одного вопроса, который важен сейчас: отношения, переезд, решение.', plMs: 'Отмена в любой момент', plY: 'На год', plYp: 'в год', plYl: 'Пройди каждый сезон своего неба: транзиты, личные месяцы, Луна и твои циклы.', plYs: '3 дня бесплатно', plL: 'Навсегда', plLp: 'один раз, на всю жизнь', plLl: 'Вся твоя личная карта в кармане, навсегда и в одном месте.', plLs: 'Один платёж', plIncl: 'Каждый план открывает всё',
     prFine: 'В App Store цены показываются в твоей местной валюте. Оплату проводит Apple; подписки продлеваются автоматически, и отменить их можно в любой момент в настройках Apple ID.',
 
     faqEyebrow: 'Вопросы', faqTitle: 'Прежде чем <em>начать.</em>',
